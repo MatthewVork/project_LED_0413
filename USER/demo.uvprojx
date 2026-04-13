@@ -697,6 +697,16 @@
               <FileType>1</FileType>
               <FilePath>..\MYCODE\pic_01.c</FilePath>
             </File>
+            <File>
+              <FileName>bemfa.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MYCODE\bemfa.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\esp8266.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
