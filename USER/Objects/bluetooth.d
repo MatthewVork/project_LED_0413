@@ -42,3 +42,4 @@
 .\objects\bluetooth.o: ..\MYCODE\ws2812.h
 .\objects\bluetooth.o: ..\USER\main.h
 .\objects\bluetooth.o: ..\MYCODE\bluetooth.h
+.\objects\bluetooth.o: ..\MYCODE\mic.h

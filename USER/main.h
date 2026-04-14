@@ -7,8 +7,8 @@
 #include "stm32f4xx.h"
 #include "ws2812.h"
 #include "bluetooth.h"
+#include "mic.h"
 
-uint16_t Get_Audio_Raw(void);
 void Delay_ms(uint32_t ms);
 
 #endif
