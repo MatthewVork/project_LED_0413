@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\demo.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\demo.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Mon Apr 13 20:21:15 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Tue Apr 14 10:30:34 2026
 <BR><P>
 <H3>Maximum Stack Usage =        224 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -116,7 +116,7 @@ Function Pointers
  <LI><a href="#[3a]">TIM8_UP_TIM13_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[42]">UART4_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[43]">UART5_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
- <LI><a href="#[33]">USART1_IRQHandler</a> from main.o(i.USART1_IRQHandler) referenced from startup_stm32f40_41xxx.o(RESET)
+ <LI><a href="#[33]">USART1_IRQHandler</a> from bluetooth.o(i.USART1_IRQHandler) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[34]">USART2_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[35]">USART3_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
  <LI><a href="#[55]">USART6_IRQHandler</a> from startup_stm32f40_41xxx.o(.text) referenced from startup_stm32f40_41xxx.o(RESET)
@@ -690,7 +690,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[89]"></a>BT_State_Pin_Init</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, main.o(i.BT_State_Pin_Init))
+<P><STRONG><a name="[89]"></a>BT_State_Pin_Init</STRONG> (Thumb, 34 bytes, Stack size 16 bytes, bluetooth.o(i.BT_State_Pin_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = BT_State_Pin_Init &rArr; GPIO_Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
@@ -699,7 +699,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8a]"></a>Bluetooth_P4_Init</STRONG> (Thumb, 162 bytes, Stack size 48 bytes, main.o(i.Bluetooth_P4_Init))
+<P><STRONG><a name="[8a]"></a>Bluetooth_P4_Init</STRONG> (Thumb, 162 bytes, Stack size 48 bytes, bluetooth.o(i.Bluetooth_P4_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96<LI>Call Chain = Bluetooth_P4_Init &rArr; USART_Init &rArr; RCC_GetClocksFreq
 </UL>
 <BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;NVIC_Init
@@ -726,8 +726,8 @@ Global Symbols
 </UL>
 
 <P><STRONG><a name="[b8]"></a>DMA_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Init
+<BR><BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Init
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
 </UL>
 
 <P><STRONG><a name="[b6]"></a>DMA_DeInit</STRONG> (Thumb, 272 bytes, Stack size 28 bytes, stm32f4xx_dma.o(i.DMA_DeInit))
@@ -753,6 +753,13 @@ Global Symbols
 <P><STRONG><a name="[b]"></a>DebugMon_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.DebugMon_Handler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
+<P><STRONG><a name="[a6]"></a>Delay_ms</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, main.o(i.Delay_ms))
+<BR><BR>[Called By]<UL><LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkRed_Twice
+<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkGreen_Twice
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
 <P><STRONG><a name="[86]"></a>GPIO_Init</STRONG> (Thumb, 120 bytes, Stack size 20 bytes, stm32f4xx_gpio.o(i.GPIO_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = GPIO_Init
 </UL>
@@ -781,8 +788,8 @@ Global Symbols
 <LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetFlagStatus
 <LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_GetConversionValue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
+<BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[6]"></a>HardFault_Handler</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, stm32f4xx_it.o(i.HardFault_Handler))
@@ -847,8 +854,8 @@ Global Symbols
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(.text)
 </UL>
 <P><STRONG><a name="[b9]"></a>TIM_Cmd</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Init
+<BR><BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Init
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
 </UL>
 
 <P><STRONG><a name="[b5]"></a>TIM_CtrlPWMOutputs</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CtrlPWMOutputs))
@@ -879,7 +886,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Init
 </UL>
 
-<P><STRONG><a name="[33]"></a>USART1_IRQHandler</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, main.o(i.USART1_IRQHandler))
+<P><STRONG><a name="[33]"></a>USART1_IRQHandler</STRONG> (Thumb, 62 bytes, Stack size 16 bytes, bluetooth.o(i.USART1_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = USART1_IRQHandler &rArr; USART_GetITStatus
 </UL>
 <BR>[Calls]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_ReceiveData
@@ -888,7 +895,7 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[99]"></a>USART1_SendString</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, main.o(i.USART1_SendString))
+<P><STRONG><a name="[99]"></a>USART1_SendString</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, bluetooth.o(i.USART1_SendString))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = USART1_SendString
 </UL>
 <BR>[Calls]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART_SendData
@@ -944,14 +951,14 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f40_41xxx.o(RESET)
 </UL>
-<P><STRONG><a name="[9d]"></a>WS2812_Audio_Sync_Step</STRONG> (Thumb, 238 bytes, Stack size 32 bytes, main.o(i.WS2812_Audio_Sync_Step))
+<P><STRONG><a name="[9d]"></a>WS2812_Audio_Sync_Step</STRONG> (Thumb, 238 bytes, Stack size 32 bytes, ws2812.o(i.WS2812_Audio_Sync_Step))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = WS2812_Audio_Sync_Step &rArr; __aeabi_dmul
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Audio_Raw
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
+<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_SetPixelColor
 <LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Clear
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Audio_Raw
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
 <LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
@@ -961,7 +968,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a7]"></a>WS2812_BlinkGreen_Twice</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, main.o(i.WS2812_BlinkGreen_Twice))
+<P><STRONG><a name="[a7]"></a>WS2812_BlinkGreen_Twice</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, ws2812.o(i.WS2812_BlinkGreen_Twice))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = WS2812_BlinkGreen_Twice &rArr; WS2812_Fill &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Fill
@@ -970,7 +977,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a9]"></a>WS2812_BlinkRed_Twice</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, main.o(i.WS2812_BlinkRed_Twice))
+<P><STRONG><a name="[a9]"></a>WS2812_BlinkRed_Twice</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, ws2812.o(i.WS2812_BlinkRed_Twice))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = WS2812_BlinkRed_Twice &rArr; WS2812_Fill &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Fill
@@ -979,7 +986,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[aa]"></a>WS2812_Breathing_Step</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, main.o(i.WS2812_Breathing_Step))
+<P><STRONG><a name="[aa]"></a>WS2812_Breathing_Step</STRONG> (Thumb, 40 bytes, Stack size 8 bytes, ws2812.o(i.WS2812_Breathing_Step))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = WS2812_Breathing_Step &rArr; WS2812_Fill &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Fill
@@ -987,25 +994,25 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a3]"></a>WS2812_Clear</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, main.o(i.WS2812_Clear))
+<P><STRONG><a name="[a3]"></a>WS2812_Clear</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, ws2812.o(i.WS2812_Clear))
 <BR><BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Meteor_Step
 <LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Init
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
 </UL>
 
-<P><STRONG><a name="[a8]"></a>WS2812_Fill</STRONG> (Thumb, 38 bytes, Stack size 24 bytes, main.o(i.WS2812_Fill))
+<P><STRONG><a name="[a8]"></a>WS2812_Fill</STRONG> (Thumb, 38 bytes, Stack size 24 bytes, ws2812.o(i.WS2812_Fill))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = WS2812_Fill &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_SetPixelColor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Breathing_Step
+<BR>[Called By]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Breathing_Step
 <LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkRed_Twice
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkGreen_Twice
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ab]"></a>WS2812_Fire_Step</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, main.o(i.WS2812_Fire_Step))
+<P><STRONG><a name="[ab]"></a>WS2812_Fire_Step</STRONG> (Thumb, 64 bytes, Stack size 24 bytes, ws2812.o(i.WS2812_Fire_Step))
 <BR><BR>[Stack]<UL><LI>Max Depth = 40<LI>Call Chain = WS2812_Fire_Step &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
@@ -1015,7 +1022,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ad]"></a>WS2812_Init</STRONG> (Thumb, 316 bytes, Stack size 120 bytes, main.o(i.WS2812_Init))
+<P><STRONG><a name="[ad]"></a>WS2812_Init</STRONG> (Thumb, 316 bytes, Stack size 120 bytes, ws2812.o(i.WS2812_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 152<LI>Call Chain = WS2812_Init &rArr; __aeabi_dmul
 </UL>
 <BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
@@ -1025,7 +1032,6 @@ Global Symbols
 <LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Init
 <LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
 <LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Clear
 <LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
 <LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OCStructInit
 <LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
@@ -1033,6 +1039,7 @@ Global Symbols
 <LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DMACmd
 <LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CtrlPWMOutputs
 <LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Clear
 <LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
@@ -1040,7 +1047,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[ba]"></a>WS2812_Meteor_Step</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, main.o(i.WS2812_Meteor_Step))
+<P><STRONG><a name="[ba]"></a>WS2812_Meteor_Step</STRONG> (Thumb, 68 bytes, Stack size 16 bytes, ws2812.o(i.WS2812_Meteor_Step))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = WS2812_Meteor_Step &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
@@ -1050,7 +1057,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[bb]"></a>WS2812_Rainbow_Step</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, main.o(i.WS2812_Rainbow_Step))
+<P><STRONG><a name="[bb]"></a>WS2812_Rainbow_Step</STRONG> (Thumb, 38 bytes, Stack size 16 bytes, ws2812.o(i.WS2812_Rainbow_Step))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = WS2812_Rainbow_Step &rArr; WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Update
@@ -1059,17 +1066,17 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[a4]"></a>WS2812_SetPixelColor</STRONG> (Thumb, 58 bytes, Stack size 12 bytes, main.o(i.WS2812_SetPixelColor))
+<P><STRONG><a name="[a4]"></a>WS2812_SetPixelColor</STRONG> (Thumb, 58 bytes, Stack size 12 bytes, ws2812.o(i.WS2812_SetPixelColor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = WS2812_SetPixelColor
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_SetWheelColor
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Meteor_Step
+<BR>[Called By]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Meteor_Step
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Fire_Step
 <LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Fill
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_SetWheelColor
 </UL>
 
-<P><STRONG><a name="[bc]"></a>WS2812_SetWheelColor</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, main.o(i.WS2812_SetWheelColor))
+<P><STRONG><a name="[bc]"></a>WS2812_SetWheelColor</STRONG> (Thumb, 70 bytes, Stack size 0 bytes, ws2812.o(i.WS2812_SetWheelColor))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = WS2812_SetWheelColor &rArr; WS2812_SetPixelColor
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_SetPixelColor
@@ -1077,7 +1084,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Rainbow_Step
 </UL>
 
-<P><STRONG><a name="[a5]"></a>WS2812_Update</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, main.o(i.WS2812_Update))
+<P><STRONG><a name="[a5]"></a>WS2812_Update</STRONG> (Thumb, 90 bytes, Stack size 16 bytes, ws2812.o(i.WS2812_Update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = WS2812_Update
 </UL>
 <BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_SetCurrDataCounter
@@ -1097,7 +1104,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_exit_exit
 </UL>
 
-<P><STRONG><a name="[74]"></a>main</STRONG> (Thumb, 346 bytes, Stack size 72 bytes, main.o(i.main))
+<P><STRONG><a name="[74]"></a>main</STRONG> (Thumb, 348 bytes, Stack size 72 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
 <LI>Call Chain = main &rArr; WS2812_Init &rArr; __aeabi_dmul
 </UL>
@@ -1114,11 +1121,11 @@ Global Symbols
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkGreen_Twice
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
 <LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;USART1_SendString
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Audio_Raw
 <LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Bluetooth_P4_Init
 <LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;BT_State_Pin_Init
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Audio_ADC_Init
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Get_Audio_Raw
 <LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Delay_ms
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Audio_ADC_Init
 <LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2sprintf
 </UL>
 <BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
@@ -1236,13 +1243,6 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = SetSysClock
 </UL>
 <BR>[Called By]<UL><LI><a href="#[60]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
-</UL>
-
-<P><STRONG><a name="[a6]"></a>Delay_ms</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, main.o(i.Delay_ms))
-<BR><BR>[Called By]<UL><LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkRed_Twice
-<LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_BlinkGreen_Twice
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;WS2812_Audio_Sync_Step
 </UL>
 
 <P><STRONG><a name="[cb]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)
