@@ -1,7 +1,7 @@
 #ifndef _WS2812_H_
 #define _WS2812_H_
 #define LED_COUNT    60
-#define RESET_PULSES 60 
+#define RESET_PULSES 60
 
 #include "main.h"
 #include "delay.h"

@@ -18,7 +18,7 @@ void WS2812_Init(void) {
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_DOWN;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
   TIM_TimeBaseInitTypeDef TIM_TimeBaseStructure;
@@ -136,7 +136,11 @@ void WS2812_SetPixelColor(uint8_t index, uint8_t r, uint8_t g, uint8_t b) {
 }
 
 void WS2812_Update(void) {
-  TIM_Cmd(TIM1, DISABLE); 
+  TIM_Cmd(TIM1, DISABLE);
+  
+  TIM_SetCounter(TIM1, 0);   // ?? 核心修复：清零计数器，防止第一根脉冲拉长
+  TIM_SetCompare1(TIM1, 0);  // ?? 核心修复：强行将比较寄存器拉低，掐断残留电平
+  
   DMA_ClearFlag(DMA2_Stream1, DMA_FLAG_TCIF1 | DMA_FLAG_HTIF1 | DMA_FLAG_TEIF1 | DMA_FLAG_DMEIF1 | DMA_FLAG_FEIF1);
   DMA_SetCurrDataCounter(DMA2_Stream1, 24 * LED_COUNT + RESET_PULSES);
   DMA_Cmd(DMA2_Stream1, ENABLE);

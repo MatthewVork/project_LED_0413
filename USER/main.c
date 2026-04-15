@@ -11,7 +11,9 @@
 uint8_t current_mode = 0; 
 
 int main(void) {	
-    uint32_t delay_1ms_cnt = 0;
+    static uint8_t is_cleared = 0;
+	
+		uint32_t delay_1ms_cnt = 0;
     uint8_t rainbow_offset = 0;
 
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
@@ -27,25 +29,25 @@ int main(void) {
     printf("==================================\r\n");
     printf("\r\n?? OneNET + 蓝牙双控 系统启动\r\n");
 	
-		while(1)
-    {
-        if(g_usart1_rx_cnt > 0)
-        {
-            delay_ms(20); // 等数据收完
-            char* rx_str = (char*)g_usart1_rx_buf;
-            
-            if(strstr(rx_str, "go"))
-            {
-                memset((void *)g_usart1_rx_buf, 0, sizeof(g_usart1_rx_buf));
-                g_usart1_rx_cnt = 0;
-                printf("\r\n?? 收到 'go' 指令，开始执行连网流程！\r\n");
-                break; // ?? 打破死循环，正式放行往下走
-            }
-            
-            memset((void *)g_usart1_rx_buf, 0, sizeof(g_usart1_rx_buf));
-            g_usart1_rx_cnt = 0;
-        }
-    }
+//		while(1)
+//    {
+//        if(g_usart1_rx_cnt > 0)
+//        {
+//            delay_ms(20); // 等数据收完
+//            char* rx_str = (char*)g_usart1_rx_buf;
+//            
+//            if(strstr(rx_str, "go"))
+//            {
+//                memset((void *)g_usart1_rx_buf, 0, sizeof(g_usart1_rx_buf));
+//                g_usart1_rx_cnt = 0;
+//                printf("\r\n?? 收到 'go' 指令，开始执行连网流程！\r\n");
+//                break; // ?? 打破死循环，正式放行往下走
+//            }
+//            
+//            memset((void *)g_usart1_rx_buf, 0, sizeof(g_usart1_rx_buf));
+//            g_usart1_rx_cnt = 0;
+//        }
+//    }
 
     while(esp8266_mqtt_init() != 0) {
         printf("?? 联网失败，正在重试...\r\n");
@@ -86,7 +88,7 @@ int main(void) {
 
                 // 2. ? 执行动作，并打上标志位
                 uint8_t cmd_executed = 0;
-                if(strstr(json_start, "\"WorkMode\":0"))      { current_mode = 0; printf("?? 云端执行: 关灯\r\n"); cmd_executed = 1; }
+                if(strstr(json_start, "\"WorkMode\":0"))       { current_mode = 0; printf("?? 云端执行: 关灯\r\n"); cmd_executed = 1; }
                 else if(strstr(json_start, "\"WorkMode\":1"))  { current_mode = 1; printf("?? 云端执行: 律动\r\n"); cmd_executed = 1; }
                 else if(strstr(json_start, "\"WorkMode\":2"))  { current_mode = 2; printf("?? 云端执行: 彩虹\r\n"); cmd_executed = 1; }
                 else if(strstr(json_start, "\"WorkMode\":3"))  { current_mode = 3; printf("?? 云端执行: 火焰\r\n"); cmd_executed = 1; }
@@ -118,10 +120,17 @@ int main(void) {
         // 动画刷新 (20ms)
         if((delay_1ms_cnt % 20) == 0) {
             switch(current_mode) {
-                case 0: WS2812_Clear(); WS2812_Update(); break;
-                case 1: WS2812_Audio_Sync_Step(); break;
-                case 2: WS2812_Rainbow_Step(rainbow_offset++); break;
-                case 3: WS2812_Fire_Step(); break;
+                case 0: 
+                    // 只有在没清空过的情况下，才发一次关灯信号
+                    if(is_cleared == 0) {
+                        WS2812_Clear(); 
+                        WS2812_Update(); 
+                        is_cleared = 1; // 标记已经关过了，以后别再发了
+                    }
+                    break;
+                case 1: is_cleared = 0; WS2812_Audio_Sync_Step(); break;
+                case 2: is_cleared = 0; WS2812_Rainbow_Step(rainbow_offset++); break;
+                case 3: is_cleared = 0; WS2812_Fire_Step(); break;
             }
         }
         

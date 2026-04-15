@@ -6,11 +6,11 @@
 // ==========================================
 // OneNET ��¼����
 // ==========================================
-#define MQTT_BROKERADDRESS 		"xxxx"
-#define MQTT_CLIENTID 			"xxxx"
-#define MQTT_USARNAME 			"xxxxx"
-#define MQTT_PASSWD 			"xxxx"
-#define PORT		            xxxx
+#define MQTT_BROKERADDRESS 		"mqtts.heclouds.com"
+#define MQTT_CLIENTID 			"stm32f4xx"
+#define MQTT_USARNAME 			"9e20IFjk58"
+#define MQTT_PASSWD 			"version=2018-10-31&res=products%2F9e20IFjk58%2Fdevices%2Fstm32f4xx&et=2147483647&method=sha1&sign=ixwt688roJKk79g6ZB1gMPEYeHc%3D"
+#define PORT		            1883
 
 // ==========================================
 // OneNET ��ģ������
