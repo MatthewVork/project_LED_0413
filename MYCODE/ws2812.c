@@ -117,7 +117,7 @@ void WS2812_Audio_Sync_Step(void) {
     WS2812_Update();
     
     // 帧率控制，20ms 相当于一秒刷新 50 次，人眼看着非常流畅
-    Delay_ms(10); 
+    //delay_ms(10); 
 } 
 
 // =====================================================================
@@ -158,14 +158,14 @@ void WS2812_Fill(uint8_t r, uint8_t g, uint8_t b) {
 // =====================================================================
 void WS2812_BlinkRed_Twice(void) {
     for(int i = 0; i < 2; i++) {
-        WS2812_Fill(255, 0, 0); Delay_ms(200);          
-        WS2812_Fill(0, 0, 0);   Delay_ms(200);          
+        WS2812_Fill(255, 0, 0); delay_ms(200);          
+        WS2812_Fill(0, 0, 0);   delay_ms(200);          
     }
 }
 void WS2812_BlinkGreen_Twice(void) {
     for(int i = 0; i < 2; i++) {
-        WS2812_Fill(0, 255, 0); Delay_ms(200);
-        WS2812_Fill(0, 0, 0); Delay_ms(200);
+        WS2812_Fill(0, 255, 0); delay_ms(200);
+        WS2812_Fill(0, 0, 0); delay_ms(200);
     }
 }
 void WS2812_SetWheelColor(uint8_t index, uint8_t pos) {

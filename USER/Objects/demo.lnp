@@ -50,11 +50,11 @@
 ".\objects\myiic.o"
 ".\objects\24cxx.o"
 ".\objects\pic_01.o"
-".\objects\bemfa.o"
-".\objects\esp8266.o"
 ".\objects\ws2812.o"
 ".\objects\bluetooth.o"
 ".\objects\mic.o"
+".\objects\esp8266.o"
+".\objects\esp8266_mqtt.o"
 ".\objects\lv_disp.o"
 ".\objects\lv_event.o"
 ".\objects\lv_group.o"
@@ -266,7 +266,7 @@
 ".\objects\img_demo_widgets_avatar.o"
 ".\objects\img_lvgl_logo.o"
 ".\objects\lv_demo_keypad_encoder.o"
---strict --scatter ".\Objects\demo.sct"
+--library_type=microlib --strict --scatter ".\Objects\demo.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list ".\Listings\demo.map" -o .\Objects\demo.axf

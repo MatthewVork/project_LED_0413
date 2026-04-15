@@ -42,4 +42,8 @@
 .\objects\ws2812.o: ..\MYCODE\ws2812.h
 .\objects\ws2812.o: ..\MYCODE\bluetooth.h
 .\objects\ws2812.o: ..\USER\main.h
+.\objects\ws2812.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\ws2812.o: ..\MYCODE\esp8266.h
+.\objects\ws2812.o: ..\MYCODE\esp8266_mqtt.h
 .\objects\ws2812.o: ..\MYCODE\mic.h
+.\objects\ws2812.o: ..\SYSTEM\delay.h

@@ -1,8 +1,4 @@
 .\objects\main.o: main.c
-.\objects\main.o: main.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: ..\CORE\stm32f4xx.h
 .\objects\main.o: ..\CORE\core_cm4.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -38,7 +34,17 @@
 .\objects\main.o: ..\FWLIB\inc\stm32f4xx_dac.h
 .\objects\main.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\main.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\main.o: ..\SYSTEM\delay.h
+.\objects\main.o: ..\SYSTEM\usart.h
+.\objects\main.o: ..\MYCODE\esp8266.h
+.\objects\main.o: ..\MYCODE\esp8266_mqtt.h
+.\objects\main.o: ..\MYCODE\mic.h
+.\objects\main.o: ..\USER\main.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: ..\MYCODE\ws2812.h
 .\objects\main.o: ..\USER\main.h
 .\objects\main.o: ..\MYCODE\bluetooth.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\main.o: ..\MYCODE\mic.h

@@ -4,6 +4,7 @@
 #define RESET_PULSES 60 
 
 #include "main.h"
+#include "delay.h"
 
 void WS2812_Init(void);
 void WS2812_Audio_Sync_Step(void);

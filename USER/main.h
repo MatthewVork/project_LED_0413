@@ -7,6 +7,8 @@
 #include "stm32f4xx.h"
 #include "ws2812.h"
 #include "bluetooth.h"
+#include "esp8266.h"
+#include "esp8266_mqtt.h"
 #include "mic.h"
 
 void Delay_ms(uint32_t ms);

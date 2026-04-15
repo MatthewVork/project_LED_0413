@@ -1,9 +1,4 @@
-.\objects\esp8266.o: esp8266.c
-.\objects\esp8266.o: ..\MYCODE\esp8266.h
-.\objects\esp8266.o: ..\USER\main.h
-.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
-.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\esp8266.o: ..\MYCODE\esp8266.c
 .\objects\esp8266.o: ..\CORE\stm32f4xx.h
 .\objects\esp8266.o: ..\CORE\core_cm4.h
 .\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
@@ -39,7 +34,9 @@
 .\objects\esp8266.o: ..\FWLIB\inc\stm32f4xx_dac.h
 .\objects\esp8266.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\esp8266.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
-.\objects\esp8266.o: ..\MYCODE\ws2812.h
-.\objects\esp8266.o: ..\USER\main.h
-.\objects\esp8266.o: ..\MYCODE\bluetooth.h
-.\objects\esp8266.o: ..\MYCODE\mic.h
+.\objects\esp8266.o: ..\SYSTEM\sys.h
+.\objects\esp8266.o: ..\SYSTEM\delay.h
+.\objects\esp8266.o: ..\SYSTEM\usart.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\esp8266.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

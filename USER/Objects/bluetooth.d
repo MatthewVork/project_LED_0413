@@ -41,5 +41,9 @@
 .\objects\bluetooth.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\bluetooth.o: ..\MYCODE\ws2812.h
 .\objects\bluetooth.o: ..\USER\main.h
+.\objects\bluetooth.o: ..\SYSTEM\delay.h
 .\objects\bluetooth.o: ..\MYCODE\bluetooth.h
+.\objects\bluetooth.o: ..\MYCODE\esp8266.h
+.\objects\bluetooth.o: ..\MYCODE\esp8266_mqtt.h
 .\objects\bluetooth.o: ..\MYCODE\mic.h
+.\objects\bluetooth.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
