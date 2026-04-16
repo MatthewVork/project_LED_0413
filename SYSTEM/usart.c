@@ -76,7 +76,7 @@ void usart1_init(uint32_t baud)
 	
 	
 	//使能串口接收到数据触发中断
-	USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
+	//USART_ITConfig(USART1, USART_IT_RXNE, ENABLE);
 	
 	NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;

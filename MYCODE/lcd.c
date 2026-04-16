@@ -1,7 +1,6 @@
 #include "lcd.h"
 #include "stdlib.h"
 #include "font.h"
-#include "usart.h"
 #include "delay.h"
 #include <string.h>
 #include "FontDotMatrix32.h"

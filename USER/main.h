@@ -12,5 +12,8 @@
 #include "mic.h"
 
 void Delay_ms(uint32_t ms);
+void USART3_Init_Safe(uint32_t baudrate);
+void usart3_send_str(char *str);
+void usart3_send_bytes(uint8_t *buf, uint32_t len);
 
 #endif

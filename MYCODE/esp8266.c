@@ -1,10 +1,11 @@
 #include "stm32f4xx.h"
 #include "sys.h"
 #include "delay.h"
-#include "usart.h"
+#include "main.h"
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+
 
 uint8_t  g_esp8266_tx_buf[512];
 volatile uint8_t  g_esp8266_rx_buf[512];
@@ -15,7 +16,7 @@ volatile uint32_t g_esp8266_transparent_transmission_sta=0;
 
 void esp8266_init(void)
 {
-	usart3_init(115200);
+	USART3_Init_Safe(115200);
 }
 
 

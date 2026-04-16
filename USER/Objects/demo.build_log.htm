@@ -22,34 +22,40 @@ Dialog DLL:      TCM.DLL V1.36.2.0
  
 <h2>Project:</h2>
 C:\Users\Matthew\Downloads\project_LED_0413\USER\demo.uvprojx
-Project File Date:  04/15/2026
+Project File Date:  04/16/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'Target 1'
 compiling main.c...
-..\SYSTEM\delay.h(14): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\MYCODE\esp8266_mqtt.h(36): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\main.h(16): warning:  #1-D: last line of file ends without a newline
-  #endif
 ..\MYCODE\ws2812.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\USER\main.h(19): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\MYCODE\bluetooth.h(16): warning:  #1-D: last line of file ends without a newline
   #endif
-..\MYCODE\mic.h(9): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\USER\main.h(16): warning:  #1-D: last line of file ends without a newline
+..\MYCODE\esp8266_mqtt.h(36): warning:  #1-D: last line of file ends without a newline
   #endif
 ..\MYCODE\mic.h(9): warning:  #1-D: last line of file ends without a newline
   #endif
-main.c(143): warning:  #1-D: last line of file ends without a newline
+..\USER\main.h(19): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\SYSTEM\delay.h(14): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\MYCODE\ws2812.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+main.c(239): warning:  #870-D: invalid multibyte character sequence
+                  else if(strstr(json_start, "\"WorkMode\":1"))  { current_mode = 1; printf(">> 云端执行: 模式1(�?)\r\n"); WS2812_Fill(255, 0, 0); cmd_executed = 1; }
+main.c(240): warning:  #870-D: invalid multibyte character sequence
+                  else if(strstr(json_start, "\"WorkMode\":2"))  { current_mode = 2; printf(">> 云端执行: 模式2(�?)\r\n"); WS2812_Fill(0, 255, 0); cmd_executed = 1; }
+main.c(241): warning:  #870-D: invalid multibyte character sequence
+                  else if(strstr(json_start, "\"WorkMode\":3"))  { current_mode = 3; printf(">> 云端执行: 模式3(�?)\r\n"); WS2812_Fill(0, 0, 255); cmd_executed = 1; }
+main.c(269): warning:  #1-D: last line of file ends without a newline
   }
-main.c: 9 warnings, 0 errors
+main.c: 12 warnings, 0 errors
 linking...
-Program Size: Code=12048 RO-data=556 RW-data=108 ZI-data=9164  
-".\Objects\demo.axf" - 0 Error(s), 9 Warning(s).
+Program Size: Code=12072 RO-data=556 RW-data=88 ZI-data=8120  
+".\Objects\demo.axf" - 0 Error(s), 12 Warning(s).
 
 <h2>Software Packages used:</h2>
 

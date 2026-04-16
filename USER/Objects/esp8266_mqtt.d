@@ -38,6 +38,5 @@
 .\objects\esp8266_mqtt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\esp8266_mqtt.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\esp8266_mqtt.o: ..\SYSTEM\delay.h
-.\objects\esp8266_mqtt.o: ..\SYSTEM\usart.h
 .\objects\esp8266_mqtt.o: ..\MYCODE\esp8266.h
 .\objects\esp8266_mqtt.o: ..\MYCODE\esp8266_mqtt.h

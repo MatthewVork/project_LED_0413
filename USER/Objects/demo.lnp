@@ -38,7 +38,6 @@
 ".\objects\stm32f4xx_wwdg.o"
 ".\objects\stm32f4xx_fsmc.o"
 ".\objects\sys.o"
-".\objects\usart.o"
 ".\objects\delay.o"
 ".\objects\main.o"
 ".\objects\led.o"

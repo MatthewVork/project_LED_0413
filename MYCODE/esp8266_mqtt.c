@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "delay.h"
-#include "usart.h"
 #include "esp8266.h"
 #include "esp8266_mqtt.h"
 
