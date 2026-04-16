@@ -2286,13 +2286,13 @@ void LCD_Init(void)
 		delay_ms(200);				  // Dis-charge capacitor power voltage
 		LCD_WriteReg(0x0010, 0x1690); // SAP, BT[3:0], AP, DSTB, SLP, STB
 		LCD_WriteReg(0x0011, 0x0227); // DC1[2:0], DC0[2:0], VC[2:0]
-		delay_ms(50);				  // Delay 50ms
+		delay_ms(50);				  // delay 50ms
 		LCD_WriteReg(0x0012, 0x000C); // Internal reference voltage= Vci;
-		delay_ms(50);				  // Delay 50ms
+		delay_ms(50);				  // delay 50ms
 		LCD_WriteReg(0x0013, 0x0800); // Set VDV[4:0] for VCOM amplitude
 		LCD_WriteReg(0x0029, 0x0011); // Set VCM[5:0] for VCOMH
 		LCD_WriteReg(0x002B, 0x000B); // Set Frame Rate
-		delay_ms(50);				  // Delay 50ms
+		delay_ms(50);				  // delay 50ms
 		LCD_WriteReg(0x0020, 0x0000); // GRAM horizontal Address
 		LCD_WriteReg(0x0021, 0x013f); // GRAM Vertical Address
 		// ----------- Adjust the Gamma Curve ----------//

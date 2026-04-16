@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include "esp8266.h"
 
 
 uint8_t  g_esp8266_tx_buf[512];

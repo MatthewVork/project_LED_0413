@@ -1,6 +1,5 @@
 #include "delay.h"
 
-
 //在21MHZ，1us计21个数
 u32 my_us = 21;
 //在21MHZ，1ms计21000个数
