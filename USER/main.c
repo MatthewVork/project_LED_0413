@@ -4,7 +4,8 @@
 #include <stdlib.h>
 #include "ws2812.h"
 #include "esp8266.h"       
-#include "esp8266_mqtt.h"  
+#include "esp8266_mqtt.h"
+#include "delay.h"
 
 // =====================================================================
 // [全局变量区]
@@ -14,20 +15,6 @@
 uint8_t current_mode = 0;   
 uint8_t rainbow_offset = 0; 
 uint8_t meteor_pos = 0;  
-
-// =====================================================================
-// [1] 系统精确延时 (使用 DWT 周期计数器)
-// =====================================================================
-static void DWT_Init(void) {
-    CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
-    DWT->CYCCNT = 0;
-    DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk;
-}
-void Delay_ms(uint32_t ms) {
-    uint32_t clk = SystemCoreClock / 1000;
-    uint32_t cnt = DWT->CYCCNT;
-    while(DWT->CYCCNT - cnt < ms * clk);
-}
 
 // =====================================================================
 // [3] 电脑与蓝牙串口 USART1 (PA9, PA10) - 绝对安全版
@@ -157,7 +144,7 @@ void USART3_IRQHandler(void) {
 int main(void) {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
     SystemInit();
-    DWT_Init();
+    Delay_Init();
     
     // 硬件底层初始化
     WS2812_Init();
