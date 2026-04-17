@@ -53,18 +53,18 @@ typedef struct
 //画笔颜色
 #define WHITE         	 0xFFFF
 #define BLACK         	 0x0000	  
-#define BLUE         	 0x001F  
+#define BLUE  	       	 0x001F  
 #define BRED             0XF81F
-#define GRED 			 0XFFE0
-#define GBLUE			 0X07FF
+#define GRED 				 		 0XFFE0
+#define GBLUE						 0X07FF
 #define RED           	 0xF800
 #define MAGENTA       	 0xF81F
 #define GREEN         	 0x07E0
 #define CYAN          	 0x7FFF
 #define YELLOW        	 0xFFE0
-#define BROWN 			 0XBC40 //棕色
-#define BRRED 			 0XFC07 //棕红色
-#define GRAY  			 0X8430 //灰色
+#define BROWN 			 		 0XBC40 //棕色
+#define BRRED 			 		 0XFC07 //棕红色
+#define GRAY  			 		 0X8430 //灰色
 //GUI颜色
 
 #define DARKBLUE      	 0X01CF	//深蓝色
@@ -73,8 +73,8 @@ typedef struct
 //以上三色为PANEL的颜色 
  
 #define LIGHTGREEN     	 0X841F //浅绿色
-//#define LIGHTGRAY        0XEF5B //浅灰色(PANNEL)
-#define LGRAY 			 0XC618 //浅灰色(PANNEL),窗体背景色
+//#define LIGHTGRAY      0XEF5B //浅灰色(PANNEL)
+#define LGRAY 			 		 0XC618 //浅灰色(PANNEL),窗体背景色
 
 #define LGRAYBLUE        0XA651 //浅灰蓝色(中间层颜色)
 #define LBBLUE           0X2B12 //浅棕蓝色(选择条目的反色)
@@ -109,11 +109,11 @@ void LCD_Set_Window(u16 sx,u16 sy,u16 width,u16 height);	//设置窗口
 #define SSD_HOR_RESOLUTION		800		//LCD水平分辨率
 #define SSD_VER_RESOLUTION		480		//LCD垂直分辨率
 //LCD驱动参数设置
-#define SSD_HOR_PULSE_WIDTH		1		//水平脉宽
+#define SSD_HOR_PULSE_WIDTH		1			//水平脉宽
 #define SSD_HOR_BACK_PORCH		46		//水平前廊
 #define SSD_HOR_FRONT_PORCH		210		//水平后廊
 
-#define SSD_VER_PULSE_WIDTH		1		//垂直脉宽
+#define SSD_VER_PULSE_WIDTH		1			//垂直脉宽
 #define SSD_VER_BACK_PORCH		23		//垂直前廊
 #define SSD_VER_FRONT_PORCH		22		//垂直前廊
 //如下几个参数，自动计算

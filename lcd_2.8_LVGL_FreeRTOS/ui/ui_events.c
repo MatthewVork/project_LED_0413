@@ -4,13 +4,28 @@
 // Project name: LCD_0415
 
 #include "ui.h"
+#include "main.h"
+
+extern volatile uint8_t current_mode;
+extern volatile uint8_t input_flag;
+extern volatile uint8_t input_source;
 
 void ui_event_click_btn_1(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+			{
+        current_mode = 2;
+        input_source = 3;  // ?? 告诉情报中心：是屏幕点的！
+        input_flag = 1;    // ?? 举旗！
+			}
 }
 
 void ui_event_click_btn_2(lv_event_t * e)
 {
-	// Your code here
+	if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+			{
+        current_mode = 5;
+        input_source = 3;  // ?? 告诉情报中心：是屏幕点的！
+        input_flag = 1;    // ?? 举旗！
+			}
 }

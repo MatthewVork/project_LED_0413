@@ -73,17 +73,3 @@ void Tim3_count_init(int psc, int period)
 }
 
 
-//编写中断服务函数。
-//1ms进入中断一次
-//void   TIM3_IRQHandler(void)
-//{
-//	//判断标志位是否置1
-//	if(TIM_GetITStatus(TIM3, TIM_IT_Update) == SET)
-//	{
-//		PFout(9) = !PFout(9);
-//		
-//		//清空中断标志位
-//		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-//	}
-
-//}

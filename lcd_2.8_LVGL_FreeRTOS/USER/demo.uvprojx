@@ -697,6 +697,31 @@
               <FileType>1</FileType>
               <FilePath>..\MYCODE\pic_01.c</FilePath>
             </File>
+            <File>
+              <FileName>bluetooth.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MYCODE\bluetooth.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MYCODE\esp8266.c</FilePath>
+            </File>
+            <File>
+              <FileName>esp8266_mqtt.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MYCODE\esp8266_mqtt.c</FilePath>
+            </File>
+            <File>
+              <FileName>mic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MYCODE\mic.c</FilePath>
+            </File>
+            <File>
+              <FileName>ws2812.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\MYCODE\ws2812.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

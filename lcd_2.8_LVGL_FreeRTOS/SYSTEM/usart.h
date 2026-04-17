@@ -16,4 +16,8 @@ void Usart1_init(u32 BaudRate);
 // ==========================================================
 void Usart3_init(u32 BaudRate);
 
+void usart3_send_str(char *str);
+void usart3_send_bytes(uint8_t *buf, uint32_t len);
+
 #endif
+// 🌟 强迫症提醒：请确保在 #endif 后面敲一个回车，留出一个空行，这样 Keil 就不会再报那个 warning #1-D 的警告了！

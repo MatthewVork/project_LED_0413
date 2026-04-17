@@ -38,7 +38,6 @@
 .\objects\lcd.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\lcd.o: ..\MYCODE\font.h
-.\objects\lcd.o: ..\SYSTEM\usart.h
 .\objects\lcd.o: ..\SYSTEM\delay.h
 .\objects\lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\lcd.o: ..\MYCODE\FontDotMatrix32.h
