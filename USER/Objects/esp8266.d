@@ -47,3 +47,4 @@
 .\objects\esp8266.o: ..\MYCODE\esp8266.h
 .\objects\esp8266.o: ..\MYCODE\esp8266_mqtt.h
 .\objects\esp8266.o: ..\MYCODE\mic.h
+.\objects\esp8266.o: ..\SYSTEM\usart.h

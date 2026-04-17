@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "esp8266.h"
+#include "usart.h"
 
 
 uint8_t  g_esp8266_tx_buf[512];
@@ -17,7 +18,7 @@ volatile uint32_t g_esp8266_transparent_transmission_sta=0;
 
 void esp8266_init(void)
 {
-	USART3_Init_Safe(115200);
+	Usart3_init(115200);
 }
 
 

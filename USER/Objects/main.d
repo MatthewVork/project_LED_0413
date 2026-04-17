@@ -47,3 +47,4 @@
 .\objects\main.o: ..\MYCODE\esp8266_mqtt.h
 .\objects\main.o: ..\MYCODE\mic.h
 .\objects\main.o: ..\SYSTEM\delay.h
+.\objects\main.o: ..\SYSTEM\usart.h
