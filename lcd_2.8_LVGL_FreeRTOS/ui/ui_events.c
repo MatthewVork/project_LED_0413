@@ -2,21 +2,23 @@
 // SquareLine Studio version: SquareLine Studio 1.4.2
 // LVGL version: 8.3.11
 // Project name: LCD_0415
-
+#include "FreeRTOS.h"
+#include "semphr.h"
 #include "ui.h"
 #include "main.h"
 
-extern volatile uint8_t current_mode;
-extern volatile uint8_t input_flag;
-extern volatile uint8_t input_source;
+extern uint8_t current_mode;
+extern uint8_t input_flag;
+extern uint8_t input_source;
+extern SemaphoreHandle_t xGuiMutex; // å¼•å…¥é”
 
 void ui_event_click_btn_1(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
 			{
         current_mode = 2;
-        input_source = 3;  // ?? ¸æËßÇé±¨ÖĞĞÄ£ºÊÇÆÁÄ»µãµÄ£¡
-        input_flag = 1;    // ?? ¾ÙÆì£¡
+        input_source = 3;  
+        input_flag = 1;    
 			}
 }
 
@@ -25,7 +27,67 @@ void ui_event_click_btn_2(lv_event_t * e)
 	if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
 			{
         current_mode = 5;
-        input_source = 3;  // ?? ¸æËßÇé±¨ÖĞĞÄ£ºÊÇÆÁÄ»µãµÄ£¡
-        input_flag = 1;    // ?? ¾ÙÆì£¡
+        input_source = 3; 
+        input_flag = 1;   
 			}
+}
+
+void ui_event_click_Red(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Blue(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Metor(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Yellow(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Fire(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_RainBow(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_Silder(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Breathing(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_White(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Off(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Connect_Onenet(lv_event_t * e)
+{
+	// Your code here
+}
+
+void ui_event_click_Connect_Bluetooth(lv_event_t * e)
+{
+	// Your code here
 }

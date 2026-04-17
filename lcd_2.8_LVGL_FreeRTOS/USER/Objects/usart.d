@@ -36,3 +36,14 @@
 .\objects\usart.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\usart.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
 .\objects\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\usart.o: ..\USER\main.h
+.\objects\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\usart.o: ..\MYCODE\ws2812.h
+.\objects\usart.o: ..\USER\main.h
+.\objects\usart.o: ..\SYSTEM\delay.h
+.\objects\usart.o: ..\MYCODE\bluetooth.h
+.\objects\usart.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\objects\usart.o: ..\MYCODE\esp8266.h
+.\objects\usart.o: ..\MYCODE\esp8266_mqtt.h
+.\objects\usart.o: ..\MYCODE\mic.h

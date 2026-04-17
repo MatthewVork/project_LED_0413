@@ -1,81 +1,68 @@
 #include "delay.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
-//在21MHZ，1us计21个数
-u32 my_us = 21;
-//在21MHZ，1ms计21000个数
-u32 my_ms = 21000;
+// 你的时钟是 168MHz/8 = 21MHz，所以 1us 需要 21 个时钟周期
+static uint32_t fac_us = 21; 
 
-void Delay_Init(void)
+void delay_Init(void)
 {
-	//配置Systick定时器时钟源：168MHZ/8 = 21MHZ
-	SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
-
+    // ?? 恢复开机供氧！专门为了让 LCD_Init 等硬件初始化能正常跑完。
+    // 等 FreeRTOS 启动后，会自动重写这里的配置，不用担心冲突。
+    SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
+    SysTick->LOAD = 0xFFFFFF; // 随便给个足够大的重载值
+    SysTick->VAL = 0x00;      // 清空计数器
+    SysTick->CTRL |= 0x01;    // 开启定时器！
 }
 
-//nus取值范围：1~798915
-void delay_us(u32 nus) 
+// 采用“只读不写”的安全延时
+void delay_us(u32 nus)
 {
-	u32 temp;
-	//设置定时器重载值寄存器
-	SysTick->LOAD = my_us*nus-1;
-	//设置计数器值为0
-	SysTick->VAL = 0x00;
-	
-	
-	//做延时是不需要产生异常
-	
-	//启动定时器
-	SysTick->CTRL |= 0x01;
-	
-	do
-	{
-		temp = SysTick->CTRL;
-		
-		
-	//temp & 0x01判断定时器是否使能	
-	//!(temp  & (0x01<<16))判断计数器是否计数到0
-	}while( (temp & 0x01) && !(temp  & (0x01<<16)));
-	
-	//关闭定时器
-	SysTick->CTRL &= ~0x01;
+    u32 ticks;
+    u32 told, tnow, tcnt = 0;
+    u32 reload;
 
+    reload = SysTick->LOAD; 
+    ticks = nus * fac_us;   
+    told = SysTick->VAL;    
+
+    while (1)
+    {
+        tnow = SysTick->VAL;
+        if (tnow != told)
+        {
+            if (tnow < told) 
+                tcnt += told - tnow;
+            else 
+                tcnt += reload - tnow + told;
+            
+            told = tnow;
+            
+            if (tcnt >= ticks) break; 
+        }
+    }
 }
-//nms取值范围：1~798
+
+// 智能毫秒延时
 void delay_ms(u32 nms)
 {
-	u32 temp;
-	//设置定时器重载值寄存器
-	SysTick->LOAD = my_ms*nms-1;
-	//设置计数器值为0
-	SysTick->VAL = 0x00;
-	
-	
-	//做延时是不需要产生异常
-	
-	//启动定时器
-	SysTick->CTRL |= 0x01;
-	
-	do
-	{
-		temp = SysTick->CTRL;
-		
-		
-	//temp & 0x01判断定时器是否使能	
-	//!(temp  & (0x01<<16))判断计数器是否计数到0
-	}while( (temp & 0x01) && !(temp  & (0x01<<16)));
-	
-	//关闭定时器
-	SysTick->CTRL &= ~0x01;
-
+    // 判断操作系统是否已经启动了？
+    if (xTaskGetSchedulerState() != taskSCHEDULER_NOT_STARTED)
+    {
+        // 如果 OS 启动了，就用不占 CPU 的睡眠延时
+        vTaskDelay(pdMS_TO_TICKS(nms));
+    }
+    else
+    {
+        // 如果 OS 还没启动（比如 LCD_Init 阶段），就老老实实用微秒死等
+        delay_us(nms * 1000);
+    }
 }
-
 
 void delay_s(u32 ns)
 {
-	for(int i=0; i<ns; i++)
-	{
-		delay_ms(500);
-		delay_ms(500);
-	}
-
+    for(int i=0; i<ns; i++)
+    {
+        delay_ms(1000);
+    }
 }

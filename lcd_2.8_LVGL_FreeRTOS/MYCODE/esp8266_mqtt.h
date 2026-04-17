@@ -32,5 +32,6 @@ extern int32_t mqtt_send_heart(void);
 extern int32_t esp8266_mqtt_init(void);
 extern void mqtt_report_devices_status(void);
 extern void mqtt_reply_set_command(char *msg_id);
+extern void mqtt_upload_current_state(void);
 
 #endif

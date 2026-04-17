@@ -1,4 +1,5 @@
 #include "usart.h"
+#include "main.h"
 
 // ==========================================================
 // [外部变量声明区] 
@@ -8,10 +9,9 @@ extern uint8_t RX_Command;
 extern uint8_t RX_Flag;
 
 // 2. ESP8266 WiFi 接收变量 (定义在 main.c 或 esp8266.c)
-#define ESP_BUF_SIZE 512
 extern uint8_t  g_esp8266_rx_buf[ESP_BUF_SIZE]; 
 extern uint32_t g_esp8266_rx_cnt;               
-extern uint8_t  g_esp8266_rx_end;               
+extern uint32_t  g_esp8266_rx_end;               
 
 // ==========================================================
 // [重定向区] 禁用半主机模式，printf 专供 USART1

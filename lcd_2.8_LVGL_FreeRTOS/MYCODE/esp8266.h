@@ -3,19 +3,14 @@
 #include "stm32f4xx.h"
 
 #define EN_DEBUG_ESP8266	0
-//添加WIFI热点宏定义，此处根据自己的wifi作调整
-//可以使用手机的热点
+
 #define WIFI_SSID 			"woshishiti"
 #define WIFI_PASSWORD		"987654321"
 
-//#define WIFI_SSID 			"AASD"
-//#define WIFI_PASSWORD		"12345678"
-
-
 extern uint8_t  g_esp8266_tx_buf[512];
-extern volatile uint8_t  g_esp8266_rx_buf[512];
-extern volatile uint32_t g_esp8266_rx_cnt;
-extern volatile uint32_t g_esp8266_rx_end;
+extern uint8_t  g_esp8266_rx_buf[512];
+extern uint32_t g_esp8266_rx_cnt;
+extern uint32_t g_esp8266_rx_end;
 
 extern volatile uint32_t g_esp8266_transparent_transmission_sta;
 

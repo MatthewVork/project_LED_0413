@@ -1957,6 +1957,11 @@
               <FileType>1</FileType>
               <FilePath>..\ui\screens\ui_Screen1.c</FilePath>
             </File>
+            <File>
+              <FileName>ui_font_Font1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\ui\fonts\ui_font_Font1.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

@@ -10,7 +10,7 @@ void USART1_SendString(char *str);
 void USART1_IRQHandler(void);
 void BT_Printf(char *fmt, ...);
 
-extern volatile uint8_t RX_Command;
-extern volatile uint8_t RX_Flag; 
+extern uint8_t RX_Command;
+extern uint8_t RX_Flag; 
 
 #endif

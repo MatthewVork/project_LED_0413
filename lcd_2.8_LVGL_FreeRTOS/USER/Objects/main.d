@@ -37,6 +37,18 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\main.o: ..\FreeRTOS\include\FreeRTOS.h
+.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\main.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\main.o: ..\FreeRTOS\include\projdefs.h
+.\objects\main.o: ..\FreeRTOS\include\portable.h
+.\objects\main.o: ..\FreeRTOS\include\deprecated_definitions.h
+.\objects\main.o: ..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\main.o: ..\FreeRTOS\include\mpu_wrappers.h
+.\objects\main.o: ..\FreeRTOS\include\task.h
+.\objects\main.o: ..\FreeRTOS\include\list.h
+.\objects\main.o: ..\SYSTEM\delay.h
+.\objects\main.o: ..\SYSTEM\usart.h
 .\objects\main.o: ..\MYCODE\ws2812.h
 .\objects\main.o: ..\USER\main.h
 .\objects\main.o: ..\MYCODE\ws2812.h
@@ -46,8 +58,6 @@
 .\objects\main.o: ..\MYCODE\esp8266.h
 .\objects\main.o: ..\MYCODE\esp8266_mqtt.h
 .\objects\main.o: ..\MYCODE\mic.h
-.\objects\main.o: ..\SYSTEM\delay.h
-.\objects\main.o: ..\SYSTEM\usart.h
 .\objects\main.o: ..\MYCODE\lcd.h
 .\objects\main.o: ..\SYSTEM\sys.h
 .\objects\main.o: ..\MYCODE\touch.h
@@ -63,7 +73,6 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\main.o: ..\LVGL\src/misc/lv_math.h
 .\objects\main.o: ..\LVGL\src/misc/lv_mem.h
-.\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\main.o: ..\LVGL\src/misc/lv_async.h
 .\objects\main.o: ..\LVGL\src/misc/lv_anim_timeline.h
 .\objects\main.o: ..\LVGL\src/misc/lv_anim.h
@@ -180,6 +189,9 @@
 .\objects\main.o: ..\LVGL\src/extra/widgets/imgbtn/lv_imgbtn.h
 .\objects\main.o: ..\LVGL\src/extra/widgets/span/lv_span.h
 .\objects\main.o: ..\LVGL\examples\porting\lv_port_disp.h
+.\objects\main.o: ..\FreeRTOS\include\semphr.h
+.\objects\main.o: ..\FreeRTOS\include\queue.h
+.\objects\main.o: ..\FreeRTOS\include\timers.h
 .\objects\main.o: ..\LVGL\examples\porting\lv_port_indev.h
 .\objects\main.o: ..\ui\ui.h
 .\objects\main.o: ..\ui\ui_helpers.h

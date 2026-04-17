@@ -35,3 +35,13 @@
 .\objects\delay.o: ..\FWLIB\inc\stm32f4xx_dac.h
 .\objects\delay.o: ..\FWLIB\inc\stm32f4xx_dcmi.h
 .\objects\delay.o: ..\FWLIB\inc\stm32f4xx_fsmc.h
+.\objects\delay.o: ..\FreeRTOS\include\FreeRTOS.h
+.\objects\delay.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\delay.o: ..\FreeRTOS\include\FreeRTOSConfig.h
+.\objects\delay.o: ..\FreeRTOS\include\projdefs.h
+.\objects\delay.o: ..\FreeRTOS\include\portable.h
+.\objects\delay.o: ..\FreeRTOS\include\deprecated_definitions.h
+.\objects\delay.o: ..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\delay.o: ..\FreeRTOS\include\mpu_wrappers.h
+.\objects\delay.o: ..\FreeRTOS\include\task.h
+.\objects\delay.o: ..\FreeRTOS\include\list.h
