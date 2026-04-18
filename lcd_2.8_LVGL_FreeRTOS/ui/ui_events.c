@@ -11,75 +11,110 @@ extern uint8_t current_mode;
 extern uint8_t input_flag;
 extern uint8_t input_source;
 extern SemaphoreHandle_t xGuiMutex; // 引入锁
-
-void ui_event_click_btn_1(lv_event_t * e)
-{
-		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-			{
-        current_mode = 2;
-        input_source = 3;  
-        input_flag = 1;    
-			}
-}
-
-void ui_event_click_btn_2(lv_event_t * e)
-{
-	if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-			{
-        current_mode = 5;
-        input_source = 3; 
-        input_flag = 1;   
-			}
-}
+extern uint8_t meteor_pos; // 🚀 把流星的位置变量也引进来
 
 void ui_event_click_Red(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+		{
+			current_mode = Red;
+			input_source = 3;  
+			input_flag = 1;    	
+		}
 }
 
 void ui_event_click_Blue(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Blue;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_Metor(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Meteor;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_Yellow(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Yellow;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_Fire(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Fire;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_RainBow(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Rainbow;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_Silder(lv_event_t * e)
 {
-	// Your code here
+	lv_obj_t * slider = lv_event_get_target(e);
+    
+    if(lv_event_get_code(e) == LV_EVENT_VALUE_CHANGED) 
+    {
+        // 1. 获取滑块的当前值 (0~100)
+        int value = lv_slider_get_value(slider);
+        
+        // 2. 转换为 0.0 ~ 1.0 的小数，赋给总闸
+        global_brightness = value / 100.0f;
+    }
 }
 
 void ui_event_click_Breathing(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Breath;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_White(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = White;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_Off(lv_event_t * e)
 {
-	// Your code here
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		current_mode = Off;
+		input_source = 3;  
+		input_flag = 1;    
+	}
 }
 
 void ui_event_click_Connect_Onenet(lv_event_t * e)

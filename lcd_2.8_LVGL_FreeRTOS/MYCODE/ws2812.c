@@ -74,6 +74,11 @@ void WS2812_Clear(void) {
 // 🚀 强行写死：上限 60 颗
 void WS2812_SetPixelColor(uint8_t index, uint8_t r, uint8_t g, uint8_t b) {
   if(index >= 60) return;
+	
+	r = (uint8_t)(r * global_brightness);
+  g = (uint8_t)(g * global_brightness);
+  b = (uint8_t)(b * global_brightness);
+	
   uint32_t color = ((uint32_t)g << 16) | ((uint32_t)r << 8) | b;
   uint16_t* p = &g_ledDataBuffer[index * 24];
   for(int i = 0; i < 24; i++) p[i] = ((color >> (23 - i)) & 0x01) ? T1H : T0H;

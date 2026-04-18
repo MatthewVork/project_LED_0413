@@ -1,39 +1,10 @@
-#include "stm32f4xx.h"
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-// FreeRTOS 头文件
-#include "FreeRTOS.h"
-#include "task.h"
-
-// 硬件与业务头文件
-#include "delay.h"
-#include "usart.h"
-#include "ws2812.h"
-#include "esp8266.h"       
-#include "esp8266_mqtt.h"
-#include "mic.h"
-#include "lcd.h"
-#include "touch.h"
-#include "tim.h"
 #include "main.h"
 
-// LVGL 头文件
-#include "lvgl.h"
-#include "lv_port_disp.h"
-#include "semphr.h"
-#include "timers.h"
-
-// =====================================================================
-// [全局变量区] - 情报中心与状态机
-// =====================================================================
-#include "lv_port_indev.h"
-#include "..\ui\ui.h"
-
 uint8_t current_mode = 0;  // 当前模式
-uint8_t input_flag = 0;    // 情报官：是否有新指令 (0:无, 1:有)
+uint8_t input_flag   = 0;  // 是否有新指令 (0:无, 1:有)
 uint8_t input_source = 0;  // 追踪器：1:蓝牙, 2:OneNET, 3:触摸屏
+
+volatile float global_brightness = 1.0f;
 
 uint8_t rainbow_offset = 0; 
 uint8_t meteor_pos = 0;  
@@ -41,7 +12,7 @@ uint8_t meteor_pos = 0;
 // 通讯缓冲变量
 uint8_t RX_Command;
 uint8_t RX_Flag;
-#define ESP_BUF_SIZE 512
+
 uint8_t  g_esp8266_rx_buf[ESP_BUF_SIZE]; 
 uint32_t g_esp8266_rx_cnt = 0;           
 uint32_t g_esp8266_rx_end = 0;  
@@ -72,7 +43,7 @@ int main(void)
 {
     // 1. 底层与时钟 (FreeRTOS 必须使用 Group_4)
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_4);
-		delay_Init();
+    delay_Init();
     
     // 2. 硬件外设初始化
     WS2812_Init();
@@ -95,7 +66,7 @@ int main(void)
     printf("\r\n>>> System Hardware Ready! Starting FreeRTOS... <<<\r\n");
 
     // ==========================================================
-    // 🚀 FreeRTOS 资源创建
+    // FreeRTOS 资源创建
     // ==========================================================
     xGuiMutex = xSemaphoreCreateMutex();
 
@@ -117,13 +88,13 @@ int main(void)
 }
 
 // =====================================================================
-// 🖥️ 部门 1：GUI 刷新任务 (负责让屏幕保持丝滑)
+// 1：GUI 刷新任务 (优先级最低，确保流畅显示)
 // =====================================================================
 void Task_GUI(void *pvParameters)
 {
     while(1)
     {
-        // 任何修改 UI 或刷新的操作，必须拿到这把锁！
+        // 任何修改 UI 或刷新的操作，必须拿到这把锁
         if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
             lv_task_handler(); 
             xSemaphoreGive(xGuiMutex);
@@ -133,31 +104,34 @@ void Task_GUI(void *pvParameters)
 }
 
 // =====================================================================
-// 🌈 部门 2：灯光渲染引擎 (绝对卡点，不受通讯干扰)
+// 2：灯光渲染引擎，根据 current_mode 的值切换不同的灯效动画
 // =====================================================================
 void Task_LED(void *pvParameters)
 {
     uint32_t anim_interval = 100; 
+	
+		TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
     {
         switch(current_mode) {
-            case 0: WS2812_Fill(0, 0, 0);                  anim_interval = 100; break;  //关闭灯光
-            case 1: WS2812_Fill(255, 255, 0);              anim_interval = 100; break;  //红色灯光
-            case 2: WS2812_Fill(0, 255, 0);                anim_interval = 100; break;  //绿色灯光
-            case 3: WS2812_Fill(0, 0, 255);                anim_interval = 100; break;  //蓝色灯光
-            case 4: WS2812_Rainbow_Step(rainbow_offset++); anim_interval = 20;  break;
-            case 5: WS2812_Meteor_Step(&meteor_pos);       anim_interval = 30;  break;
-            case 6: WS2812_Breathing_Step(NULL);           anim_interval = 10;  break;
-            case 7: WS2812_Fire_Step();                    anim_interval = 50;  break;
-            case 8: WS2812_Audio_Sync_Step();              anim_interval = 20;  break; 
+            case Off:     WS2812_Fill(0, 0, 0);                     anim_interval = 200; break;  //关闭灯光
+            case White:   WS2812_Fill(255, 255, 255);               anim_interval = 200; break;  //红色灯光
+            case Red:     WS2812_Fill(255, 0, 0);                   anim_interval = 200; break;  //红色灯光
+            case Yellow:  WS2812_Fill(255, 255, 0);                 anim_interval = 200; break;  //黄色灯光
+            case Blue:    WS2812_Fill(0, 0, 255);                   anim_interval = 200; break;  //蓝色灯光
+            case Fire:    WS2812_Fire_Step();                       anim_interval = 20;  break;
+            case Breath:  WS2812_Breathing_Step(NULL);              anim_interval = 30;  break;
+            case Audio:   WS2812_Audio_Sync_Step();                 anim_interval = 10;  break;
+            case Meteor:  WS2812_Meteor_Step(&meteor_pos);          anim_interval = 50;  break;
+            case Rainbow: WS2812_Rainbow_Step(rainbow_offset++);    anim_interval = 20;  break; 
             default: anim_interval = 100; break; 
         }
-        vTaskDelay(pdMS_TO_TICKS(anim_interval)); // OS 帮你精准延时！
+        vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(anim_interval));
     }
 }
 
 // =====================================================================
-// 📡 部门 3：通讯解析与情报中心 (最高优先级，数据秒回)
+// 3：通讯解析处理来自蓝牙和云端的指令，并更新 current_mode 和 input_flag
 // =====================================================================
 void Task_Comms(void *pvParameters)
 {
@@ -181,16 +155,18 @@ void Task_Comms(void *pvParameters)
         last_bt_state = current_bt_state; 
 
         if(RX_Flag) {
-            switch(RX_Command) {
-                case '1': current_mode = 1; break; 
-                case '2': current_mode = 2; break; 
-                case '3': current_mode = 3; break; 
-                case '4': current_mode = 4; break; 
-                case '5': current_mode = 5; meteor_pos = 0; break; 
-                case '6': current_mode = 6; break; 
-                case '7': current_mode = 7; break; 
-                case '8': current_mode = 8; break; 
-                case '0': current_mode = 0; break; 
+            switch(RX_Command - 48) {
+                case Off:     current_mode = Off;     break; 
+                case White:   current_mode = White;   break; 
+                case Red:     current_mode = Red;     break; 
+                case Yellow:  current_mode = Yellow;  break; 
+                case Blue:    current_mode = Blue;    break; 
+                case Fire:    current_mode = Fire;    break; 
+                case Breath:  current_mode = Breath;  break; 
+                case Audio:   current_mode = Audio;   break; 
+                case Meteor:  current_mode = Meteor;  break;
+                case Rainbow: current_mode = Rainbow; break;
+                default: break;
             }
             input_source = 1; input_flag = 1; 
             RX_Flag = 0; 
@@ -230,15 +206,16 @@ void Task_Comms(void *pvParameters)
                 }
 
                 uint8_t cmd_executed = 0;
-                if(strstr(json_start, "\"WorkMode\":0"))      { current_mode = 0; cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":1")) { current_mode = 1; cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":2")) { current_mode = 2; cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":3")) { current_mode = 3; cmd_executed = 1; }
-								else if(strstr(json_start, "\"WorkMode\":4"))	{ current_mode = 4; cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":5")) { current_mode = 5; meteor_pos = 0; cmd_executed = 1; }
-								else if(strstr(json_start, "\"WorkMode\":6"))	{ current_mode = 6; cmd_executed = 1; }
-								else if(strstr(json_start, "\"WorkMode\":6"))	{ current_mode = 7; cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":8")) { current_mode = 8; cmd_executed = 1; }
+                if     (strstr(json_start, "\"WorkMode\":0")) { current_mode = Off;     cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":1")) { current_mode = White;   cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":2")) { current_mode = Red;     cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":3")) { current_mode = Yellow;  cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":4")) { current_mode = Blue;    cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":5")) { current_mode = Fire;    cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":6")) { current_mode = Breath;  cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":7")) { current_mode = Audio;   cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":8")) { current_mode = Meteor;  cmd_executed = 1; meteor_pos = 0;}
+                else if(strstr(json_start, "\"WorkMode\":9")) { current_mode = Rainbow; cmd_executed = 1; }
 
                 if(cmd_executed) {
                     input_source = 2; input_flag = 1; 
@@ -255,21 +232,22 @@ void Task_Comms(void *pvParameters)
         if (input_flag == 1) 
         {
             printf("\r\n------------------------------------\r\n");
-            if (input_source == 1)      printf("[指令来源] >>> 蓝牙端 (Bluetooth)\r\n");
+            if      (input_source == 1) printf("[指令来源] >>> 蓝牙端 (Bluetooth)\r\n");
             else if (input_source == 2) printf("[指令来源] >>> 云平台 (OneNET)\r\n");
             else if (input_source == 3) printf("[指令来源] >>> 触摸屏 (LVGL UI)\r\n");
 
             printf("[执行动作] >>> ");
             switch(current_mode) {
-                case 0: printf("关闭氛围灯 (OFF)\r\n"); break;
-                case 1: printf("切换为: 红色常亮\r\n"); break;
-                case 2: printf("切换为: 绿色常亮\r\n"); break;
-                case 3: printf("切换为: 蓝色常亮\r\n"); break;
-                case 4: printf("切换为: 七彩跑马灯 (Rainbow)\r\n"); break;
-                case 5: printf("切换为: 流星雨 (Meteor)\r\n"); break;
-                case 6: printf("切换为: 呼吸灯 (Breathing)\r\n"); break;
-                case 7: printf("切换为: 火焰特效 (Fire)\r\n"); break;
-                case 8: printf("切换为: 音乐律动 (Audio Sync)\r\n"); break;
+                case Off:       printf("关闭氛围灯 (OFF)\r\n"); break;
+                case White:     printf("切换为: 白色常亮\r\n"); break;
+                case Red:       printf("切换为: 红色常亮\r\n"); break;
+                case Yellow:    printf("切换为: 黄色常亮\r\n"); break;
+                case Blue:      printf("切换为: 蓝色常亮\r\n"); break;
+                case Fire:      printf("切换为: 火焰 (Fire)\r\n"); break;
+                case Breath:    printf("切换为: 呼吸灯 (Breathing)\r\n"); break;
+                case Audio:     printf("切换为: 音乐律动 (Audio Sync)\r\n"); break;
+                case Meteor:    printf("切换为: 流星雨 (Meteor)\r\n"); break;
+                case Rainbow:   printf("切换为: 彩虹渐变 (Rainbow)\r\n"); break;
                 default:printf("未知模式\r\n"); break;
             }
             printf("------------------------------------\r\n");

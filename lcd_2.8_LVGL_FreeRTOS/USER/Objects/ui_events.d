@@ -186,3 +186,13 @@
 .\objects\ui_events.o: ..\MYCODE\esp8266.h
 .\objects\ui_events.o: ..\MYCODE\esp8266_mqtt.h
 .\objects\ui_events.o: ..\MYCODE\mic.h
+.\objects\ui_events.o: ..\FreeRTOS\include\task.h
+.\objects\ui_events.o: ..\FreeRTOS\include\list.h
+.\objects\ui_events.o: ..\SYSTEM\usart.h
+.\objects\ui_events.o: ..\MYCODE\lcd.h
+.\objects\ui_events.o: ..\SYSTEM\sys.h
+.\objects\ui_events.o: ..\MYCODE\touch.h
+.\objects\ui_events.o: ..\MYCODE\tim.h
+.\objects\ui_events.o: ..\LVGL\examples\porting\lv_port_disp.h
+.\objects\ui_events.o: ..\FreeRTOS\include\timers.h
+.\objects\ui_events.o: ..\LVGL\examples\porting\lv_port_indev.h
