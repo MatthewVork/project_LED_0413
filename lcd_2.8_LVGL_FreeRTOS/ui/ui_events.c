@@ -75,15 +75,17 @@ void ui_event_click_RainBow(lv_event_t * e)
 
 void ui_event_Silder(lv_event_t * e)
 {
-	lv_obj_t * slider = lv_event_get_target(e);
-    
-    if(lv_event_get_code(e) == LV_EVENT_VALUE_CHANGED) 
+    if(lv_event_get_code(e) == LV_EVENT_RELEASED) 
     {
-        // 1. 获取滑块的当前值 (0~100)
-        int value = lv_slider_get_value(slider);
+        lv_obj_t * slider = lv_event_get_target(e);
+        int val = lv_slider_get_value(slider);
         
-        // 2. 转换为 0.0 ~ 1.0 的小数，赋给总闸
-        global_brightness = value / 100.0f;
+        // 修改全局亮度总闸
+        global_brightness = val / 100.0f; 
+        
+        //既然只触发一次，现在你可以极其安全地加上 OneNET 同步标志了！
+        //input_source = 3;  
+        //input_flag = 1;    
     }
 }
 

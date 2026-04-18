@@ -47,7 +47,7 @@ extern lv_obj_t * ui_Label9;
 void ui_event_Button10(lv_event_t * e);
 extern lv_obj_t * ui_Button10;
 extern lv_obj_t * ui_Label10;
-extern lv_obj_t * ui_Label7;
+extern lv_obj_t * ui_Label_brightness;
 void ui_event_Button7(lv_event_t * e);
 extern lv_obj_t * ui_Button7;
 extern lv_obj_t * ui_Label11;

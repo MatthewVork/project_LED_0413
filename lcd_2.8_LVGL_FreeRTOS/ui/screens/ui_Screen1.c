@@ -155,14 +155,14 @@ void ui_Screen1_screen_init(void)
     lv_label_set_text(ui_Label10, "关闭");
     lv_obj_set_style_text_font(ui_Label10, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Label7 = lv_label_create(ui_Screen1);
-    lv_obj_set_width(ui_Label7, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label7, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label7, 58);
-    lv_obj_set_y(ui_Label7, 90);
-    lv_obj_set_align(ui_Label7, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label7, "亮度:100%");
-    lv_obj_set_style_text_font(ui_Label7, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
+    ui_Label_brightness = lv_label_create(ui_Screen1);
+    lv_obj_set_width(ui_Label_brightness, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label_brightness, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label_brightness, 58);
+    lv_obj_set_y(ui_Label_brightness, 90);
+    lv_obj_set_align(ui_Label_brightness, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label_brightness, "亮度:100%");
+    lv_obj_set_style_text_font(ui_Label_brightness, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Button7 = lv_btn_create(ui_Screen1);
     lv_obj_set_width(ui_Button7, 70);

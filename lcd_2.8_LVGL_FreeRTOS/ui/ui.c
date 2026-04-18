@@ -41,7 +41,7 @@ lv_obj_t * ui_Label9;
 void ui_event_Button10(lv_event_t * e);
 lv_obj_t * ui_Button10;
 lv_obj_t * ui_Label10;
-lv_obj_t * ui_Label7;
+lv_obj_t * ui_Label_brightness;
 void ui_event_Button7(lv_event_t * e);
 lv_obj_t * ui_Button7;
 lv_obj_t * ui_Label11;
@@ -125,7 +125,7 @@ void ui_event_Slider1(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_VALUE_CHANGED) {
+    if(event_code == LV_EVENT_RELEASED) {
         ui_event_Silder(e);
     }
 }
