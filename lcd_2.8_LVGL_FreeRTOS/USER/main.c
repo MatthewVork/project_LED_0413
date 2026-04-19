@@ -48,7 +48,7 @@ int main(void)
     // 2. 硬件外设初始化
     WS2812_Init();
     Audio_ADC_Init();        
-    BT_State_Pin_Init();     
+//    BT_State_Pin_Init();     
     Usart1_init(9600); 
     Usart3_init(115200); 
     LCD_Init();           
@@ -73,13 +73,13 @@ int main(void)
     // 创建三大任务 (堆栈大小根据实际需求调整，GUI给最大，通讯次之，灯光最小)
     xTaskCreate(Task_GUI,   "Task_GUI",   1024, NULL, 2, &Task_GUI_Handle);
     xTaskCreate(Task_LED,   "Task_LED",   256,  NULL, 3, &Task_LED_Handle);
-    xTaskCreate(Task_Comms, "Task_Comms", 512,  NULL, 4, &Task_Comms_Handle);
+//    xTaskCreate(Task_Comms, "Task_Comms", 512,  NULL, 4, &Task_Comms_Handle);
 
-    // 创建心跳定时器 (周期 10000ms = 10秒，自动重载 pdTRUE)
-    Timer_Heartbeat_Handle = xTimerCreate("Heartbeat", pdMS_TO_TICKS(10000), pdTRUE, 0, Timer_Heartbeat_Callback);
-    if(Timer_Heartbeat_Handle != NULL) {
-        xTimerStart(Timer_Heartbeat_Handle, 0); 
-    }
+//    // 创建心跳定时器 (周期 10000ms = 10秒，自动重载 pdTRUE)
+//    Timer_Heartbeat_Handle = xTimerCreate("Heartbeat", pdMS_TO_TICKS(10000), pdTRUE, 0, Timer_Heartbeat_Callback);
+//    if(Timer_Heartbeat_Handle != NULL) {
+//        xTimerStart(Timer_Heartbeat_Handle, 0); 
+//    }
 
     // 启动调度器，接管控制权
     vTaskStartScheduler();
@@ -108,7 +108,7 @@ void Task_GUI(void *pvParameters)
 // =====================================================================
 void Task_LED(void *pvParameters)
 {
-    uint32_t anim_interval = 100; 
+    uint32_t anim_interval = 100;	//动画时间
 	
 		TickType_t xLastWakeTime = xTaskGetTickCount();
     while(1)
@@ -120,11 +120,11 @@ void Task_LED(void *pvParameters)
             case Yellow:  WS2812_Fill(255, 255, 0);                 anim_interval = 200; break;  //黄色灯光
             case Blue:    WS2812_Fill(0, 0, 255);                   anim_interval = 200; break;  //蓝色灯光
             case Fire:    WS2812_Fire_Step();                       anim_interval = 20;  break;
-            case Breath:  WS2812_Breathing_Step(NULL);              anim_interval = 30;  break;
+            case Breath:  WS2812_Breathing_Step(NULL);              anim_interval = 10;  break;
             case Audio:   WS2812_Audio_Sync_Step();                 anim_interval = 10;  break;
             case Meteor:  WS2812_Meteor_Step(&meteor_pos);          anim_interval = 50;  break;
             case Rainbow: WS2812_Rainbow_Step(rainbow_offset++);    anim_interval = 20;  break; 
-            default: anim_interval = 100; break; 
+            default: anim_interval = 200; break; 
         }
         vTaskDelayUntil(&xLastWakeTime, pdMS_TO_TICKS(anim_interval));
     }
@@ -229,54 +229,51 @@ void Task_Comms(void *pvParameters)
         // -------------------------------------------------------------
         // [中心打印台] 统一输出情报
         // -------------------------------------------------------------
-        if (input_flag == 1) 
-        {
-            printf("\r\n------------------------------------\r\n");
-            if      (input_source == 1) printf("[指令来源] >>> 蓝牙端 (Bluetooth)\r\n");
-            else if (input_source == 2) printf("[指令来源] >>> 云平台 (OneNET)\r\n");
-            else if (input_source == 3) printf("[指令来源] >>> 触摸屏 (LVGL UI)\r\n");
+//        if (input_flag == 1) 
+//        {
+//            if      (input_source == 1) printf("[指令来源] >>> 蓝牙端 (Bluetooth)\r\n");
+//            else if (input_source == 2) printf("[指令来源] >>> 云平台 (OneNET)\r\n");
+//            else if (input_source == 3) printf("[指令来源] >>> 触摸屏 (LVGL UI)\r\n");
 
-            printf("[执行动作] >>> ");
-            switch(current_mode) {
-                case Off:       printf("关闭氛围灯 (OFF)\r\n"); break;
-                case White:     printf("切换为: 白色常亮\r\n"); break;
-                case Red:       printf("切换为: 红色常亮\r\n"); break;
-                case Yellow:    printf("切换为: 黄色常亮\r\n"); break;
-                case Blue:      printf("切换为: 蓝色常亮\r\n"); break;
-                case Fire:      printf("切换为: 火焰 (Fire)\r\n"); break;
-                case Breath:    printf("切换为: 呼吸灯 (Breathing)\r\n"); break;
-                case Audio:     printf("切换为: 音乐律动 (Audio Sync)\r\n"); break;
-                case Meteor:    printf("切换为: 流星雨 (Meteor)\r\n"); break;
-                case Rainbow:   printf("切换为: 彩虹渐变 (Rainbow)\r\n"); break;
-                default:printf("未知模式\r\n"); break;
-            }
-            printf("------------------------------------\r\n");
-						
-						if(input_source == 1 || input_source == 3) 
-						{
-							 mqtt_upload_current_state();
-							 printf(">> [Sync] State synchronized to OneNET!\r\n");
-            }
+//            printf("[执行动作] >>> ");
+//            switch(current_mode) {
+//                case Off:       printf("关闭氛围灯 (OFF)\r\n"); break;
+//                case White:     printf("切换为: 白色常亮\r\n"); break;
+//                case Red:       printf("切换为: 红色常亮\r\n"); break;
+//                case Yellow:    printf("切换为: 黄色常亮\r\n"); break;
+//                case Blue:      printf("切换为: 蓝色常亮\r\n"); break;
+//                case Fire:      printf("切换为: 火焰 (Fire)\r\n"); break;
+//                case Breath:    printf("切换为: 呼吸灯 (Breathing)\r\n"); break;
+//                case Audio:     printf("切换为: 音乐律动 (Audio Sync)\r\n"); break;
+//                case Meteor:    printf("切换为: 流星雨 (Meteor)\r\n"); break;
+//                case Rainbow:   printf("切换为: 彩虹渐变 (Rainbow)\r\n"); break;
+//                default:printf("未知模式\r\n"); break;
+//            }
+//						
+//						if(input_source == 1 || input_source == 3) 
+//						{
+//							 mqtt_upload_current_state();
+//							 printf(">> [Sync] State synchronized to OneNET!\r\n");
+//            }
 
-            input_flag = 0; input_source = 0;
-        }
+//            input_flag = 0; input_source = 0;
+//        }
 
         vTaskDelay(pdMS_TO_TICKS(10)); // 防止通讯任务饿死低优先级任务
     }
 }
 
 // =====================================================================
-// 💓 部门 4：软件定时器回调 (10秒自动执行一次)
+// 部门 4：软件定时器回调 (10秒自动执行一次)
 // =====================================================================
 void Timer_Heartbeat_Callback(TimerHandle_t xTimer)
 {
     mqtt_send_heart();
 		mqtt_upload_current_state();
-    printf(">> [FreeRTOS Timer] MQTT Ping Sent to OneNET\r\n");
 }
 
 // =====================================================================
-// ⏰ 硬件中断：保留给 LVGL 的心跳 (千万别删)
+// 硬件中断：保留给 LVGL 的心跳 (千万别删)
 // =====================================================================
 void TIM3_IRQHandler(void)
 {

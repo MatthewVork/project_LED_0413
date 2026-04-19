@@ -66,6 +66,13 @@ extern lv_obj_t * ui_Label16;
 extern lv_obj_t * ui_Panel_Disconnected_Net;
 extern lv_obj_t * ui_Panel5;
 extern lv_obj_t * ui_Label17;
+extern lv_obj_t * ui_Label7;
+extern lv_obj_t * ui_Label14;
+extern lv_obj_t * ui_Label_time;
+extern lv_obj_t * ui_Label19;
+extern lv_obj_t * ui_Label20;
+extern lv_obj_t * ui_Label21;
+extern lv_obj_t * ui_Label22;
 extern lv_obj_t * ui____initial_actions0;
 
 

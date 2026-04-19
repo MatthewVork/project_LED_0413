@@ -60,6 +60,13 @@ lv_obj_t * ui_Label16;
 lv_obj_t * ui_Panel_Disconnected_Net;
 lv_obj_t * ui_Panel5;
 lv_obj_t * ui_Label17;
+lv_obj_t * ui_Label7;
+lv_obj_t * ui_Label14;
+lv_obj_t * ui_Label_time;
+lv_obj_t * ui_Label19;
+lv_obj_t * ui_Label20;
+lv_obj_t * ui_Label21;
+lv_obj_t * ui_Label22;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////

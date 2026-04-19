@@ -86,6 +86,7 @@ void ui_event_Silder(lv_event_t * e)
         //既然只触发一次，现在你可以极其安全地加上 OneNET 同步标志了！
         //input_source = 3;  
         //input_flag = 1;    
+			lv_label_set_text_fmt(ui_Label_brightness, "%d%%", val);
     }
 }
 

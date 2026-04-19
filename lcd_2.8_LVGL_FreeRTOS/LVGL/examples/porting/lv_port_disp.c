@@ -15,6 +15,7 @@
 #include "lcd.h"
 #include "sys.h"
 #include "lvgl.h"
+#include "esp8266_mqtt.h"
 
 
 /*********************
@@ -89,8 +90,8 @@ void lv_port_disp_init(void)
 
     /* Example for 1) */
     static lv_disp_draw_buf_t draw_buf_dsc_1;
-    static lv_color_t buf_1[MY_DISP_HOR_RES * 10];                          /*A buffer for 10 rows*/
-    lv_disp_draw_buf_init(&draw_buf_dsc_1, buf_1, NULL, MY_DISP_HOR_RES * 10);   /*Initialize the display buffer*/
+    static lv_color_t buf_1[MY_DISP_HOR_RES * 20];                          /*A buffer for 20 rows*/
+    lv_disp_draw_buf_init(&draw_buf_dsc_1, buf_1, NULL, MY_DISP_HOR_RES * 20);   /*Initialize the display buffer*/
 
     /* Example for 2) */
 //    static lv_disp_draw_buf_t draw_buf_dsc_2;
@@ -179,13 +180,40 @@ void disp_disable_update(void)
 /*Flush the content of the internal buffer the specific area on the display
  *You can use DMA or any hardware acceleration to do this operation in the background but
  *'lv_disp_flush_ready()' has to be called when finished.*/
-static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
+/* 1. 直接调用 LCD_Color_Fill() 函数，效率较低，适合小面积更新
+ static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
 {
     int32_t x;
     int32_t y;
     if(disp_flush_enabled) 
     {
         LCD_Color_Fill(area->x1,area->y1,area->x2,area->y2,(uint16_t *)color_p);        
+        lv_disp_flush_ready(disp_drv);
+    }
+}
+*/
+
+static void disp_flush(lv_disp_drv_t * disp_drv, const lv_area_t * area, lv_color_t * color_p)
+{
+    if(disp_flush_enabled) 
+    {
+        // 1. 计算要刷新的宽度和高度
+        uint16_t width = area->x2 - area->x1 + 1;
+        uint16_t height = area->y2 - area->y1 + 1;
+        uint32_t size = width * height;
+
+        // 2. 🚀 只设一次窗口！注意你的函数参数是 (起点X, 起点Y, 宽度, 高度)
+        LCD_Set_Window(area->x1, area->y1, width, height);
+        
+        // 3. 告诉屏幕芯片：“准备好，我要开始疯狂倒数据了！”
+        LCD_WriteRAM_Prepare();
+        
+        // 4. 🚀 开启 FSMC 极速直写！(这是单片机不加 DMA 能达到的最快速度)
+        for(uint32_t i = 0; i < size; i++) {
+            LCD->LCD_RAM = color_p[i].full; 
+        }
+        
+        // 5. 告诉 LVGL 这一车砖倒完了
         lv_disp_flush_ready(disp_drv);
     }
 }

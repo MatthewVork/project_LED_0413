@@ -167,3 +167,4 @@
 .\objects\lv_port_disp.o: ..\MYCODE\lcd.h
 .\objects\lv_port_disp.o: ..\SYSTEM\sys.h
 .\objects\lv_port_disp.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\objects\lv_port_disp.o: ..\MYCODE\esp8266_mqtt.h
