@@ -88,18 +88,38 @@ int main(void)
 }
 
 // =====================================================================
-// 1：GUI 刷新任务 (优先级最低，确保流畅显示)
+// 1：GUI 刷新任务 (加入 5 秒开机画面逻辑)
 // =====================================================================
 void Task_GUI(void *pvParameters)
 {
-    while(1)
+    // 🚀 第一阶段：让初始化屏幕 (ui_Screen_Init) 运行 5 秒钟
+    // 5000 毫秒 / 每次循环 5 毫秒 = 1000 次循环
+    for(int i = 0; i < 1000; i++) 
     {
-        // 任何修改 UI 或刷新的操作，必须拿到这把锁
         if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
-            lv_task_handler(); 
+            lv_timer_handler(); // 注意：LVGL 8.x 推荐用 lv_timer_handler
             xSemaphoreGive(xGuiMutex);
         }
-        vTaskDelay(pdMS_TO_TICKS(5)); // 睡 5ms，把 CPU 让给通信和灯带
+        vTaskDelay(pdMS_TO_TICKS(5)); 
+    }
+
+    // 🚀 第二阶段：5 秒时间到，执行华丽切换！
+    if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+        // 目标屏幕：ui_Screen_menu 
+        // 动画：淡入淡出 (FADE_ON)，耗时 500ms
+        // true：切换完成后，自动将 ui_Screen_Init 彻底销毁，释放内存！
+        lv_scr_load_anim(ui_Screen_menu, LV_SCR_LOAD_ANIM_FADE_ON, 500, 0, true);
+        xSemaphoreGive(xGuiMutex);
+    }
+
+    // 🚀 第三阶段：正式进入主循环，处理日常点击和滑动
+    while(1)
+    {
+        if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+            lv_timer_handler(); 
+            xSemaphoreGive(xGuiMutex);
+        }
+        vTaskDelay(pdMS_TO_TICKS(5)); 
     }
 }
 

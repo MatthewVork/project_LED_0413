@@ -7,6 +7,9 @@
 #include "ui.h"
 #include "main.h"
 
+#define DEFAULT_BTN_COLOR lv_color_hex(0x333333)
+#define ACTIVE_BTN_COLOR  lv_color_hex(0xFF0000) // 红色
+
 extern uint8_t current_mode;
 extern uint8_t input_flag;
 extern uint8_t input_source;
@@ -17,6 +20,13 @@ void ui_event_click_Red(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
 		{
+			// 1. 洗掉所有按钮的红色
+			Reset_All_Mode_Buttons_Color();
+			
+			// 2. 唯独把自己染成红色！
+			lv_obj_set_style_bg_color(ui_Button1, ACTIVE_BTN_COLOR, 0);
+			
+			// 3. 执行你的底层模式切换逻辑
 			current_mode = Red;
 			input_source = 3;  
 			input_flag = 1;    	
@@ -27,6 +37,13 @@ void ui_event_click_Blue(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
 	{
+		// 1. 洗掉所有按钮的红色
+		Reset_All_Mode_Buttons_Color();
+		
+		// 2. 唯独把自己染成红色！
+		lv_obj_set_style_bg_color(ui_Button1, ACTIVE_BTN_COLOR, 0);
+		
+		// 3. 执行你的底层模式切换逻辑
 		current_mode = Blue;
 		input_source = 3;  
 		input_flag = 1;    
@@ -128,4 +145,18 @@ void ui_event_click_Connect_Onenet(lv_event_t * e)
 void ui_event_click_Connect_Bluetooth(lv_event_t * e)
 {
 	// Your code here
+}
+
+void Reset_All_Mode_Buttons_Color(void)
+{
+    // 把 10 个模式按钮全部强行刷回默认颜色
+    lv_obj_set_style_bg_color(ui_Button1, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button2, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button3, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button4, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button5, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button6, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button8, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button9, DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button10, DEFAULT_BTN_COLOR, 0);
 }

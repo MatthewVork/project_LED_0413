@@ -9,9 +9,16 @@
 ///////////////////// VARIABLES ////////////////////
 
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-lv_obj_t * ui_Screen1;
+// SCREEN: ui_Screen_Init
+void ui_Screen_Init_screen_init(void);
+lv_obj_t * ui_Screen_Init;
+lv_obj_t * ui_Panel6;
+lv_obj_t * ui_Label18;
+
+
+// SCREEN: ui_Screen_menu
+void ui_Screen_menu_screen_init(void);
+lv_obj_t * ui_Screen_menu;
 void ui_event_Button1(lv_event_t * e);
 lv_obj_t * ui_Button1;
 lv_obj_t * ui_Label1;
@@ -42,11 +49,11 @@ void ui_event_Button10(lv_event_t * e);
 lv_obj_t * ui_Button10;
 lv_obj_t * ui_Label10;
 lv_obj_t * ui_Label_brightness;
-void ui_event_Button7(lv_event_t * e);
-lv_obj_t * ui_Button7;
+void ui_event_Button_Connect_Onenet(lv_event_t * e);
+lv_obj_t * ui_Button_Connect_Onenet;
 lv_obj_t * ui_Label11;
-void ui_event_Button12(lv_event_t * e);
-lv_obj_t * ui_Button12;
+void ui_event_Button_Connect_Bluetooth(lv_event_t * e);
+lv_obj_t * ui_Button_Connect_Bluetooth;
 lv_obj_t * ui_Label13;
 lv_obj_t * ui_Panel_Connected_Bluetooth;
 lv_obj_t * ui_Panel2;
@@ -66,7 +73,7 @@ lv_obj_t * ui_Label_time;
 lv_obj_t * ui_Label19;
 lv_obj_t * ui_Label20;
 lv_obj_t * ui_Label21;
-lv_obj_t * ui_Label22;
+lv_obj_t * ui_Label_led_mode;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -160,7 +167,7 @@ void ui_event_Button10(lv_event_t * e)
         ui_event_click_Off(e);
     }
 }
-void ui_event_Button7(lv_event_t * e)
+void ui_event_Button_Connect_Onenet(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
@@ -168,7 +175,7 @@ void ui_event_Button7(lv_event_t * e)
         ui_event_click_Connect_Onenet(e);
     }
 }
-void ui_event_Button12(lv_event_t * e)
+void ui_event_Button_Connect_Bluetooth(lv_event_t * e)
 {
     lv_event_code_t event_code = lv_event_get_code(e);
     lv_obj_t * target = lv_event_get_target(e);
@@ -185,7 +192,8 @@ void ui_init(void)
     lv_theme_t * theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED),
                                                false, LV_FONT_DEFAULT);
     lv_disp_set_theme(dispp, theme);
-    ui_Screen1_screen_init();
+    ui_Screen_Init_screen_init();
+    ui_Screen_menu_screen_init();
     ui____initial_actions0 = lv_obj_create(NULL);
-    lv_disp_load_scr(ui_Screen1);
+    lv_disp_load_scr(ui_Screen_Init);
 }

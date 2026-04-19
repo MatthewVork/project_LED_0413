@@ -10,14 +10,19 @@
 extern "C" {
 #endif
 
-#include "../lvgl/lvgl.h"
+#include "lvgl/lvgl.h"
 
 #include "ui_helpers.h"
 #include "ui_events.h"
 
-// SCREEN: ui_Screen1
-void ui_Screen1_screen_init(void);
-extern lv_obj_t * ui_Screen1;
+// SCREEN: ui_Screen_Init
+void ui_Screen_Init_screen_init(void);
+extern lv_obj_t * ui_Screen_Init;
+extern lv_obj_t * ui_Panel6;
+extern lv_obj_t * ui_Label18;
+// SCREEN: ui_Screen_menu
+void ui_Screen_menu_screen_init(void);
+extern lv_obj_t * ui_Screen_menu;
 void ui_event_Button1(lv_event_t * e);
 extern lv_obj_t * ui_Button1;
 extern lv_obj_t * ui_Label1;
@@ -48,11 +53,11 @@ void ui_event_Button10(lv_event_t * e);
 extern lv_obj_t * ui_Button10;
 extern lv_obj_t * ui_Label10;
 extern lv_obj_t * ui_Label_brightness;
-void ui_event_Button7(lv_event_t * e);
-extern lv_obj_t * ui_Button7;
+void ui_event_Button_Connect_Onenet(lv_event_t * e);
+extern lv_obj_t * ui_Button_Connect_Onenet;
 extern lv_obj_t * ui_Label11;
-void ui_event_Button12(lv_event_t * e);
-extern lv_obj_t * ui_Button12;
+void ui_event_Button_Connect_Bluetooth(lv_event_t * e);
+extern lv_obj_t * ui_Button_Connect_Bluetooth;
 extern lv_obj_t * ui_Label13;
 extern lv_obj_t * ui_Panel_Connected_Bluetooth;
 extern lv_obj_t * ui_Panel2;
@@ -72,7 +77,7 @@ extern lv_obj_t * ui_Label_time;
 extern lv_obj_t * ui_Label19;
 extern lv_obj_t * ui_Label20;
 extern lv_obj_t * ui_Label21;
-extern lv_obj_t * ui_Label22;
+extern lv_obj_t * ui_Label_led_mode;
 extern lv_obj_t * ui____initial_actions0;
 
 
