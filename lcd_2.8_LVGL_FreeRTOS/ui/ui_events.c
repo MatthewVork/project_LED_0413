@@ -313,7 +313,7 @@ void Sync_LCD_Light_Panel(uint8_t mode)
         case Blue: 		Highlight_Active_Button(ui_Button_Blue);		break;
 				case Fire: 		Highlight_Active_Button(ui_Button_Fire);		break;
         case Meteor: 	Highlight_Active_Button(ui_Button_Meteor);	break;
-				case Rainbow: Highlight_Active_Button(ui_Button_Rainbow);	break;
+				case Rainbow: Highlight_Active_Button(ui_Button_RainBow);	break;
 				case Audio: 	Highlight_Active_Button(ui_Button_Audio);		break;
 				case White: 	Highlight_Active_Button(ui_Button_White);		break;
 				case 0: Reset_All_Mode_Buttons_Color(); 						break; // 关灯模式特殊处理：所有按钮都不高亮

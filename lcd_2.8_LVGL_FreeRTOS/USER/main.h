@@ -31,7 +31,6 @@
 #include "lcd.h"
 #include "touch.h"
 #include "tim.h"
-#include "main.h"
 
 // LVGL 头文件
 #include "lvgl.h"

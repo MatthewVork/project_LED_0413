@@ -45,3 +45,4 @@
 .\objects\delay.o: ..\FreeRTOS\include\mpu_wrappers.h
 .\objects\delay.o: ..\FreeRTOS\include\task.h
 .\objects\delay.o: ..\FreeRTOS\include\list.h
+.\objects\delay.o: ..\CORE\core_cm4.h
