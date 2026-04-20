@@ -1,10 +1,3 @@
-#include "stm32f4xx.h"
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include "delay.h"
-#include "esp8266.h"
-#include "esp8266_mqtt.h"
 #include "main.h"
 
 extern uint8_t current_mode; 
@@ -179,31 +172,27 @@ int32_t esp8266_mqtt_init(void) {
         printf("失败! 使用开机默认时间\r\n");
     }
     // =======================================================
+		lv_label_set_text(ui_Label_Onenet_Status, " 已连接 ");
     
     printf("-> 连接OneNET...");
 	rt = esp8266_connect_server("TCP",MQTT_BROKERADDRESS,PORT);
     if(rt) { printf("失败!\r\n"); return -5; }
     printf("成功!\r\n");
-    delay_s(2);
     
     printf("-> 开启透传...");
 	rt = esp8266_entry_transparent_transmission();
     if(rt) { printf("失败!\r\n"); return -6; }
     printf("成功!\r\n");
-    delay_s(2);
     
     printf("-> 登录MQTT鉴权...");
 	rt = mqtt_connect(MQTT_CLIENTID, MQTT_USARNAME, MQTT_PASSWD);
     if(rt) { printf("失败(请检查Token)!\r\n"); return -7; }
     printf("成功!\r\n");
-    delay_s(2);
     
     printf("-> 订阅主题...");
 	rt = mqtt_subscribe_topic(MQTT_SUBSCRIBE_TOPIC,0,1);
     if(rt) { printf("失败!\r\n"); return -8; }
     printf("成功!\r\n");
-
-    lv_set_text(ui_Label_Onenet_Status, " 已连接 ");
 	return 0;
 }
 

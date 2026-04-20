@@ -174,29 +174,6 @@ void ui_event_Silder(lv_event_t * e)
     }
 }
 
-
-void ui_event_click_Connect_Onenet(lv_event_t * e)
-{
-	if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		static int Onenet_flag = 0;
-		
-		if(Onenet_flag)
-		{		
-			lv_obj_set_style_bg_color(ui_Button_Connect_Onenet, DEFAULT_BTN_COLOR, 0);
-			lv_label_set_text(ui_Label_Onenet_Status, " 未连接 ");
-			Onenet_flag = !Onenet_flag;
-		}
-		else
-		{
-			lv_obj_set_style_bg_color(ui_Button_Connect_Onenet, ACTIVE_BTN_COLOR, 0);
-			lv_label_set_text(ui_Label_Onenet_Status, " 已连接 ");
-			Onenet_flag = !Onenet_flag;
-		}
-		//后续为执行逻辑
-	}
-}
-
 void ui_event_click_Connect_Bluetooth(lv_event_t * e)
 {
     if(lv_event_get_code(e) == LV_EVENT_CLICKED) 

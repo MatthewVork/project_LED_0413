@@ -44,16 +44,15 @@
 #include "lv_port_indev.h"
 #include "..\ui\ui.h"
 
-#define Off         0x00
-#define White       0x01
-#define Red         0x02
-#define Yellow      0x03
-#define Blue        0x04
-#define Fire        0x05
-#define Breath      0x06
-#define Audio       0x07
-#define Meteor      0x08
-#define Rainbow     0x09
+#define Off     0x00
+#define Red     0x01
+#define Yellow  0x02
+#define Blue    0x03
+#define Fire    0x04
+#define Meteor  0x05
+#define Rainbow 0x06
+#define Audio   0x07
+#define White   0x08
 
 extern uint8_t RX_Command;
 extern uint8_t RX_Flag;

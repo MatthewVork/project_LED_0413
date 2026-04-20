@@ -158,7 +158,6 @@ void Task_LED(void *pvParameters)
             case Yellow:  WS2812_Fill(255, 255, 0);                 anim_interval = 200; break;  //黄色灯光
             case Blue:    WS2812_Fill(0, 0, 255);                   anim_interval = 200; break;  //蓝色灯光
             case Fire:    WS2812_Fire_Step();                       anim_interval = 20;  break;
-            case Breath:  WS2812_Breathing_Step(NULL);              anim_interval = 10;  break;
             case Audio:   WS2812_Audio_Sync_Step();                 anim_interval = 10;  break;
             case Meteor:  WS2812_Meteor_Step(&meteor_pos);          anim_interval = 50;  break;
             case Rainbow: WS2812_Rainbow_Step(rainbow_offset++);    anim_interval = 20;  break; 

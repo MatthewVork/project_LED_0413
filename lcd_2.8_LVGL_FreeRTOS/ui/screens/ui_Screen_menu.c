@@ -270,7 +270,7 @@ void ui_Screen_menu_screen_init(void)
     lv_obj_set_x(ui_Label_Onenet_Status, 110);
     lv_obj_set_y(ui_Label_Onenet_Status, -78);
     lv_obj_set_align(ui_Label_Onenet_Status, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label_Onenet_Status, "未连接");
+    lv_label_set_text(ui_Label_Onenet_Status, " 未连接 ");
     lv_obj_set_style_text_font(ui_Label_Onenet_Status, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     lv_obj_add_event_cb(ui_Button_Red, ui_event_Button_Red, LV_EVENT_ALL, NULL);
