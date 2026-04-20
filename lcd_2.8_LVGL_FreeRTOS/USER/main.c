@@ -113,15 +113,13 @@ int main(void)
 // =====================================================================
 void Task_GUI(void *pvParameters)
 {
-    // 🚀 第一阶段：让初始化屏幕 (ui_Screen_Init) 运行 5 秒钟
-    // 5000 毫秒 / 每次循环 5 毫秒 = 1000 次循环
     for(int i = 0; i < 1000; i++) 
     {
         if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
             lv_timer_handler(); 
             xSemaphoreGive(xGuiMutex);
         }
-        vTaskDelay(pdMS_TO_TICKS(5)); 
+        vTaskDelay(pdMS_TO_TICKS(1)); 
     }
 
     // 🚀 第二阶段：5 秒时间到，执行华丽切换！
@@ -227,22 +225,22 @@ void Task_Comms(void *pvParameters)
         last_bt_state = current_bt_state; 
 
         // -------------------------------------------------------------
-        // [控制路 2] 蓝牙串口指令处理
+        // [控制路 2] 蓝牙指令处理
         // -------------------------------------------------------------
         if (RX_Flag == 1) 
         {
             if (bt_control_enabled == 1) 
             {
                 switch(RX_Command) {
-                    case '1': current_mode = Red;     break;
-                    case '2': current_mode = Yellow;  break;
-                    case '3': current_mode = Blue;    break;
-                    case '4': current_mode = Fire;    break;
-                    case '5': current_mode = Meteor;  meteor_pos = 0; break;
-                    case '6': current_mode = Rainbow; break;
-                    case '7': current_mode = Audio;   break;
-                    case '8': current_mode = White;   break;
-                    case '0': current_mode = Off;     break;
+                    case '1': current_mode = Red;     lv_label_set_text(ui_Label_led_mode," 红色 ");break;
+                    case '2': current_mode = Yellow;  lv_label_set_text(ui_Label_led_mode," 黄色 ");break;
+                    case '3': current_mode = Blue;    lv_label_set_text(ui_Label_led_mode," 蓝色 ");break;
+                    case '4': current_mode = Fire;    lv_label_set_text(ui_Label_led_mode," 火焰 ");break;
+                    case '5': current_mode = Meteor;  lv_label_set_text(ui_Label_led_mode," 流星 ");meteor_pos = 0; break;
+                    case '6': current_mode = Rainbow; lv_label_set_text(ui_Label_led_mode," 彩虹 ");break;
+                    case '7': current_mode = Audio;   lv_label_set_text(ui_Label_led_mode," 音频 ");break;
+                    case '8': current_mode = White;   lv_label_set_text(ui_Label_led_mode," 白色 ");break;
+                    case '0': current_mode = Off;     lv_label_set_text(ui_Label_led_mode," 关闭 ");break;
                 }
                 input_source = 1; input_flag = 1;
                 
@@ -285,16 +283,16 @@ void Task_Comms(void *pvParameters)
 
                 // 2. 执行动作
                 uint8_t cmd_executed = 0;
-                if(strstr(json_start, "\"WorkMode\":0"))       { current_mode = Off;    cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":1"))  { current_mode = Red;    cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":2"))  { current_mode = Yellow; cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":3"))  { current_mode = Blue;   cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":4"))  { current_mode = Fire;   cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":5"))  { current_mode = Meteor; cmd_executed = 1; meteor_pos = 0; }
-                else if(strstr(json_start, "\"WorkMode\":6"))  { current_mode = Rainbow;cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":7"))  { current_mode = Audio;  cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":8"))  { current_mode = White;  cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":9"))  { current_mode = Off;    cmd_executed = 1; }
+                if(strstr(json_start, "\"WorkMode\":0"))       { current_mode = Off;    lv_label_set_text(ui_Label_led_mode," 关闭 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":1"))  { current_mode = Red;    lv_label_set_text(ui_Label_led_mode," 红色 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":2"))  { current_mode = Yellow; lv_label_set_text(ui_Label_led_mode," 黄色 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":3"))  { current_mode = Blue;   lv_label_set_text(ui_Label_led_mode," 蓝色 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":4"))  { current_mode = Fire;   lv_label_set_text(ui_Label_led_mode," 火焰 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":5"))  { current_mode = Meteor; lv_label_set_text(ui_Label_led_mode," 流星 ");cmd_executed = 1; meteor_pos = 0; }
+                else if(strstr(json_start, "\"WorkMode\":6"))  { current_mode = Rainbow;lv_label_set_text(ui_Label_led_mode," 彩虹 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":7"))  { current_mode = Audio;  lv_label_set_text(ui_Label_led_mode," 音频 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":8"))  { current_mode = White;  lv_label_set_text(ui_Label_led_mode," 白光 ");cmd_executed = 1; }
+                else if(strstr(json_start, "\"WorkMode\":9"))  { current_mode = Off;    lv_label_set_text(ui_Label_led_mode," 关闭 ");cmd_executed = 1; }
 
                 // 3. 回码与 LCD 同步
                 if(cmd_executed) {
@@ -367,7 +365,7 @@ void Timer_Clock_Callback(TimerHandle_t xTimer)
         // ⚠️ 注意：请把 ui_Label_Time 换成你 SquareLine 里实际的时间 Label 名字！
         if (time_synced == 0) {
             // 还没连上 WiFi，保持神秘感
-            lv_label_set_text(ui_Label_time, "----/--/-- --:--:--"); 
+            lv_label_set_text(ui_Label_time, " 正在加载时间 "); 
         } else {
             // 拿到真实时间了，正常跳字
             lv_label_set_text_fmt(ui_Label_time, "%04d-%02d-%02d %02d:%02d:%02d", 

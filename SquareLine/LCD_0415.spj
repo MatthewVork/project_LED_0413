@@ -11230,7 +11230,7 @@
               {
                 "nid": 1959134892,
                 "strtype": "LABEL/Text",
-                "strval": "未连接",
+                "strval": "连接中...",
                 "InheritedType": 10
               },
               {

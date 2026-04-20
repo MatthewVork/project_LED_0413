@@ -1535,9 +1535,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\USER\..\ui\ui.h)(0x69E61A09)
-I (..\USER\..\ui\ui_helpers.h)(0x69E618D3)
-I (..\USER\..\ui\ui_events.h)(0x69E618D3)
+I (..\USER\..\ui\ui.h)(0x69E622E1)
+I (..\USER\..\ui\ui_helpers.h)(0x69E622D8)
+I (..\USER\..\ui\ui_events.h)(0x69E622D8)
 F (..\SYSTEM\delay.c)(0x69E5D7AB)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
 I (..\SYSTEM\delay.h)(0x69E20EF3)
 I (..\CORE\stm32f4xx.h)(0x6899551C)
@@ -1584,7 +1584,7 @@ I (..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h)(0x693B8590)
 I (..\FreeRTOS\include\mpu_wrappers.h)(0x693B858A)
 I (..\FreeRTOS\include\task.h)(0x693B858A)
 I (..\FreeRTOS\include\list.h)(0x693B858A)
-F (.\main.c)(0x69E61C14)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x69E625B8)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (main.h)(0x69E61BEF)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEB79E2)
@@ -1776,9 +1776,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\ui\ui.h)(0x69E61A09)
-I (..\ui\ui_helpers.h)(0x69E618D3)
-I (..\ui\ui_events.h)(0x69E618D3)
+I (..\ui\ui.h)(0x69E622E1)
+I (..\ui\ui_helpers.h)(0x69E622D8)
+I (..\ui\ui_events.h)(0x69E622D8)
 F (..\MYCODE\led.c)(0x6892AED2)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\led.o --omf_browse .\objects\led.crf --depend .\objects\led.d)
 I (..\MYCODE\led.h)(0x68907B69)
 I (..\CORE\stm32f4xx.h)(0x6899551C)
@@ -2242,9 +2242,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\USER\..\ui\ui.h)(0x69E61A09)
-I (..\USER\..\ui\ui_helpers.h)(0x69E618D3)
-I (..\USER\..\ui\ui_events.h)(0x69E618D3)
+I (..\USER\..\ui\ui.h)(0x69E622E1)
+I (..\USER\..\ui\ui_helpers.h)(0x69E622D8)
+I (..\USER\..\ui\ui_events.h)(0x69E622D8)
 F (..\MYCODE\esp8266.c)(0x69E617A9)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\esp8266.o --omf_browse .\objects\esp8266.crf --depend .\objects\esp8266.d)
 I (..\CORE\stm32f4xx.h)(0x6899551C)
 I (..\CORE\core_cm4.h)(0x53C7D530)
@@ -2436,9 +2436,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\USER\..\ui\ui.h)(0x69E61A09)
-I (..\USER\..\ui\ui_helpers.h)(0x69E618D3)
-I (..\USER\..\ui\ui_events.h)(0x69E618D3)
+I (..\USER\..\ui\ui.h)(0x69E622E1)
+I (..\USER\..\ui\ui_helpers.h)(0x69E622D8)
+I (..\USER\..\ui\ui_events.h)(0x69E622D8)
 F (..\MYCODE\esp8266_mqtt.c)(0x69E61B11)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\esp8266_mqtt.o --omf_browse .\objects\esp8266_mqtt.crf --depend .\objects\esp8266_mqtt.d)
 I (..\USER\main.h)(0x69E61BEF)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
@@ -2630,9 +2630,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\USER\..\ui\ui.h)(0x69E61A09)
-I (..\USER\..\ui\ui_helpers.h)(0x69E618D3)
-I (..\USER\..\ui\ui_events.h)(0x69E618D3)
+I (..\USER\..\ui\ui.h)(0x69E622E1)
+I (..\USER\..\ui\ui_helpers.h)(0x69E622D8)
+I (..\USER\..\ui\ui_events.h)(0x69E622D8)
 F (..\MYCODE\mic.c)(0x69E1EB8D)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\mic.o --omf_browse .\objects\mic.crf --depend .\objects\mic.d)
 I (..\MYCODE\mic.h)(0x69E1C9C3)
 I (..\USER\main.h)(0x69E61BEF)
@@ -2824,9 +2824,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\USER\..\ui\ui.h)(0x69E61A09)
-I (..\USER\..\ui\ui_helpers.h)(0x69E618D3)
-I (..\USER\..\ui\ui_events.h)(0x69E618D3)
+I (..\USER\..\ui\ui.h)(0x69E622E1)
+I (..\USER\..\ui\ui_helpers.h)(0x69E622D8)
+I (..\USER\..\ui\ui_events.h)(0x69E622D8)
 F (..\MYCODE\ws2812.c)(0x69E31F82)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ws2812.o --omf_browse .\objects\ws2812.crf --depend .\objects\ws2812.d)
 I (..\MYCODE\ws2812.h)(0x69E1C9B6)
 I (..\USER\main.h)(0x69E61BEF)
@@ -3018,9 +3018,9 @@ I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-I (..\USER\..\ui\ui.h)(0x69E61A09)
-I (..\USER\..\ui\ui_helpers.h)(0x69E618D3)
-I (..\USER\..\ui\ui_events.h)(0x69E618D3)
+I (..\USER\..\ui\ui.h)(0x69E622E1)
+I (..\USER\..\ui\ui_helpers.h)(0x69E622D8)
+I (..\USER\..\ui\ui_events.h)(0x69E622D8)
 F (..\LVGL\src\core\lv_disp.c)(0x65707EAF)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\lv_disp.o --omf_browse .\objects\lv_disp.crf --depend .\objects\lv_disp.d)
 I (..\LVGL\src\core\lv_disp.h)(0x65707EAF)
 I (..\LVGL\src\core\../hal/lv_hal.h)(0x65707EAF)
@@ -18797,8 +18797,8 @@ I (..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h)(0x693B8590)
 I (..\FreeRTOS\include\mpu_wrappers.h)(0x693B858A)
 I (..\FreeRTOS\include\task.h)(0x693B858A)
 I (..\FreeRTOS\include\list.h)(0x693B858A)
-F (..\ui\ui.c)(0x69E618D3)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui.o --omf_browse .\objects\ui.crf --depend .\objects\ui.d)
-I (..\ui\ui.h)(0x69E61A09)
+F (..\ui\ui.c)(0x69E622D8)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui.o --omf_browse .\objects\ui.crf --depend .\objects\ui.d)
+I (..\ui\ui.h)(0x69E622E1)
 I (..\ui\../lvgl/lvgl.h)(0x65707EAF)
 I (..\ui\../lvgl/src/misc/lv_log.h)(0x65707EAF)
 I (..\ui\../lvgl/src/misc/../lv_conf_internal.h)(0x65707EAF)
@@ -18928,8 +18928,8 @@ I (..\ui\../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/led/lv_led.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/span/lv_span.h)(0x65707EAF)
-I (..\ui\ui_helpers.h)(0x69E618D3)
-I (..\ui\ui_events.h)(0x69E618D3)
+I (..\ui\ui_helpers.h)(0x69E622D8)
+I (..\ui\ui_events.h)(0x69E622D8)
 F (..\ui\ui_events.c)(0x69E61A42)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_events.o --omf_browse .\objects\ui_events.crf --depend .\objects\ui_events.d)
 I (..\FreeRTOS\include\FreeRTOS.h)(0x693B858A)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5CEB79E2)
@@ -18942,7 +18942,7 @@ I (..\FreeRTOS\portable\RVDS\ARM_CM4F\portmacro.h)(0x693B8590)
 I (..\FreeRTOS\include\mpu_wrappers.h)(0x693B858A)
 I (..\FreeRTOS\include\semphr.h)(0x693B858A)
 I (..\FreeRTOS\include\queue.h)(0x693B858A)
-I (..\ui\ui.h)(0x69E61A09)
+I (..\ui\ui.h)(0x69E622E1)
 I (..\ui\../lvgl/lvgl.h)(0x65707EAF)
 I (..\ui\../lvgl/src/misc/lv_log.h)(0x65707EAF)
 I (..\ui\../lvgl/src/misc/../lv_conf_internal.h)(0x65707EAF)
@@ -19070,8 +19070,8 @@ I (..\ui\../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/led/lv_led.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/span/lv_span.h)(0x65707EAF)
-I (..\ui\ui_helpers.h)(0x69E618D3)
-I (..\ui\ui_events.h)(0x69E618D3)
+I (..\ui\ui_helpers.h)(0x69E622D8)
+I (..\ui\ui_events.h)(0x69E622D8)
 I (..\USER\main.h)(0x69E61BEF)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5CEB79E2)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5CEB79E2)
@@ -19124,9 +19124,9 @@ I (..\MYCODE\tim.h)(0x689EA46D)
 I (..\LVGL\examples\porting\lv_port_disp.h)(0x69D8A2AF)
 I (..\FreeRTOS\include\timers.h)(0x693B858A)
 I (..\LVGL\examples\porting\lv_port_indev.h)(0x69D8A3CA)
-F (..\ui\ui_helpers.c)(0x69E618D3)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_helpers.o --omf_browse .\objects\ui_helpers.crf --depend .\objects\ui_helpers.d)
-I (..\ui\ui_helpers.h)(0x69E618D3)
-I (..\ui\ui.h)(0x69E61A09)
+F (..\ui\ui_helpers.c)(0x69E622D8)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_helpers.o --omf_browse .\objects\ui_helpers.crf --depend .\objects\ui_helpers.d)
+I (..\ui\ui_helpers.h)(0x69E622D8)
+I (..\ui\ui.h)(0x69E622E1)
 I (..\ui\../lvgl/lvgl.h)(0x65707EAF)
 I (..\ui\../lvgl/src/misc/lv_log.h)(0x65707EAF)
 I (..\ui\../lvgl/src/misc/../lv_conf_internal.h)(0x65707EAF)
@@ -19256,14 +19256,14 @@ I (..\ui\../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/led/lv_led.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x65707EAF)
 I (..\ui\../lvgl/src/extra/widgets/span/lv_span.h)(0x65707EAF)
-I (..\ui\ui_events.h)(0x69E618D3)
-F (..\ui\CMakeLists.txt)(0x69E618D3)()
-F (..\ui\filelist.txt)(0x69E618D3)()
-F (..\ui\ui.h)(0x69E61A09)()
-F (..\ui\ui_events.h)(0x69E618D3)()
-F (..\ui\ui_helpers.h)(0x69E618D3)()
-F (..\ui\fonts\ui_font_Font1.c)(0x69E58AA8)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_font_font1.o --omf_browse .\objects\ui_font_font1.crf --depend .\objects\ui_font_font1.d)
-I (..\ui\fonts\../ui.h)(0x69E61A09)
+I (..\ui\ui_events.h)(0x69E622D8)
+F (..\ui\CMakeLists.txt)(0x69E622D8)()
+F (..\ui\filelist.txt)(0x69E622D8)()
+F (..\ui\ui.h)(0x69E622E1)()
+F (..\ui\ui_events.h)(0x69E622D8)()
+F (..\ui\ui_helpers.h)(0x69E622D8)()
+F (..\ui\fonts\ui_font_Font1.c)(0x69E622D3)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_font_font1.o --omf_browse .\objects\ui_font_font1.crf --depend .\objects\ui_font_font1.d)
+I (..\ui\fonts\../ui.h)(0x69E622E1)
 I (..\ui\fonts\../../lvgl/lvgl.h)(0x65707EAF)
 I (..\ui\fonts\../../lvgl/src/misc/lv_log.h)(0x65707EAF)
 I (..\ui\fonts\../../lvgl/src/misc/../lv_conf_internal.h)(0x65707EAF)
@@ -19393,10 +19393,10 @@ I (..\ui\fonts\../../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x65707E
 I (..\ui\fonts\../../lvgl/src/extra/widgets/led/lv_led.h)(0x65707EAF)
 I (..\ui\fonts\../../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x65707EAF)
 I (..\ui\fonts\../../lvgl/src/extra/widgets/span/lv_span.h)(0x65707EAF)
-I (..\ui\fonts\../ui_helpers.h)(0x69E618D3)
-I (..\ui\fonts\../ui_events.h)(0x69E618D3)
-F (..\ui\screens\ui_Screen_Init.c)(0x69E618D3)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_screen_init.o --omf_browse .\objects\ui_screen_init.crf --depend .\objects\ui_screen_init.d)
-I (..\ui\screens\../ui.h)(0x69E61A09)
+I (..\ui\fonts\../ui_helpers.h)(0x69E622D8)
+I (..\ui\fonts\../ui_events.h)(0x69E622D8)
+F (..\ui\screens\ui_Screen_Init.c)(0x69E622D8)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_screen_init.o --omf_browse .\objects\ui_screen_init.crf --depend .\objects\ui_screen_init.d)
+I (..\ui\screens\../ui.h)(0x69E622E1)
 I (..\ui\screens\../../lvgl/lvgl.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/misc/lv_log.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/misc/../lv_conf_internal.h)(0x65707EAF)
@@ -19526,10 +19526,10 @@ I (..\ui\screens\../../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6570
 I (..\ui\screens\../../lvgl/src/extra/widgets/led/lv_led.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/extra/widgets/span/lv_span.h)(0x65707EAF)
-I (..\ui\screens\../ui_helpers.h)(0x69E618D3)
-I (..\ui\screens\../ui_events.h)(0x69E618D3)
-F (..\ui\screens\ui_Screen_menu.c)(0x69E61A5F)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_screen_menu.o --omf_browse .\objects\ui_screen_menu.crf --depend .\objects\ui_screen_menu.d)
-I (..\ui\screens\../ui.h)(0x69E61A09)
+I (..\ui\screens\../ui_helpers.h)(0x69E622D8)
+I (..\ui\screens\../ui_events.h)(0x69E622D8)
+F (..\ui\screens\ui_Screen_menu.c)(0x69E622D8)(--c99 --gnu -c --cpu Cortex-M4.fp -g -O2 --apcs=interwork --split_sections -I ..\USER -I ..\SYSTEM -I ..\CORE -I ..\FWLIB\inc -I ..\MYCODE -I ..\LVGL -I ..\LVGL\src -I ..\LVGL\examples\porting -I ..\LVGL\demos\widgets -I ..\FreeRTOS\include -I ..\FreeRTOS\portable\RVDS\ARM_CM4F-I.\RTE\_Target_1-IC:\Keil_v5\Arm\Packs\Keil\STM32F4xx_DFP\1.0.8\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="528" -DSTM32F40_41xxx -DUSE_STDPERIPH_DRIVER -DSTM32F40_41xxx -DLV_LVGL_H_INCLUDE_SIMPLE-o .\objects\ui_screen_menu.o --omf_browse .\objects\ui_screen_menu.crf --depend .\objects\ui_screen_menu.d)
+I (..\ui\screens\../ui.h)(0x69E622E1)
 I (..\ui\screens\../../lvgl/lvgl.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/misc/lv_log.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/misc/../lv_conf_internal.h)(0x65707EAF)
@@ -19659,5 +19659,5 @@ I (..\ui\screens\../../lvgl/src/extra/widgets/colorwheel/lv_colorwheel.h)(0x6570
 I (..\ui\screens\../../lvgl/src/extra/widgets/led/lv_led.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/extra/widgets/imgbtn/lv_imgbtn.h)(0x65707EAF)
 I (..\ui\screens\../../lvgl/src/extra/widgets/span/lv_span.h)(0x65707EAF)
-I (..\ui\screens\../ui_helpers.h)(0x69E618D3)
-I (..\ui\screens\../ui_events.h)(0x69E618D3)
+I (..\ui\screens\../ui_helpers.h)(0x69E622D8)
+I (..\ui\screens\../ui_events.h)(0x69E622D8)
