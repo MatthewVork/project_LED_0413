@@ -17,7 +17,7 @@ void ui_event_click_Yellow(lv_event_t * e);
 void ui_event_click_Fire(lv_event_t * e);
 void ui_event_click_RainBow(lv_event_t * e);
 void ui_event_Silder(lv_event_t * e);
-void ui_event_click_Breathing(lv_event_t * e);
+void ui_event_click_Audio(lv_event_t * e);
 void ui_event_click_White(lv_event_t * e);
 void ui_event_click_Off(lv_event_t * e);
 void ui_event_click_Connect_Onenet(lv_event_t * e);

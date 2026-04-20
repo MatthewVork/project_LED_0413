@@ -63,7 +63,13 @@ extern uint8_t  g_esp8266_rx_buf[ESP_BUF_SIZE];
 extern uint32_t g_esp8266_rx_cnt;
 extern uint32_t g_esp8266_rx_end;
 extern volatile float global_brightness;
+extern volatile uint8_t bt_control_enabled;
+extern volatile uint8_t bt_is_waiting;
+extern uint32_t bt_start_tick;
 
-
+extern void Trigger_Bluetooth_Toast(uint8_t is_connected);
+extern void Trigger_BT_Disconnected(void);
+extern void Trigger_BT_Success(void);
+extern void Sync_LCD_Light_Panel(uint8_t mode);
 
 #endif

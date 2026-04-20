@@ -115,15 +115,23 @@ void Usart3_init(u32 BaudRate)
 // ==========================================================
 // [中断服务区] USART1 - 处理蓝牙指令
 // ==========================================================
-void USART1_IRQHandler(void)
+void USART1_IRQHandler(void)                
 {
-    if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)
-    {
-        uint8_t res = USART_ReceiveData(USART1);
-        RX_Command = res; 
-        RX_Flag = 1;      
-        USART_ClearITPendingBit(USART1, USART_IT_RXNE);
-    }
+	if(USART_GetITStatus(USART1, USART_IT_RXNE) != RESET)  
+	{
+        // 1. 先把接收到的字符暂存下来，别急着放进信箱
+		uint8_t temp_char = USART_ReceiveData(USART1); 
+        
+        // 2. 🚀 核心防线：只允许数字 '0' 到 '9' 丢进信箱！
+        // 彻底屏蔽手机 APP 自动加的 \r, \n, 空格等无效字符
+        if (temp_char >= '0' && temp_char <= '9') 
+        {
+            RX_Command = temp_char; // 放进信箱
+            RX_Flag = 1;            // 举起旗子通知保安
+        }
+
+		USART_ClearITPendingBit(USART1, USART_IT_RXNE);
+	}
 }
 
 // ==========================================================

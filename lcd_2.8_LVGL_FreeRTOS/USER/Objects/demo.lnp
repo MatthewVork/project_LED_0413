@@ -278,8 +278,9 @@
 ".\objects\ui.o"
 ".\objects\ui_events.o"
 ".\objects\ui_helpers.o"
-".\objects\ui_screen1.o"
 ".\objects\ui_font_font1.o"
+".\objects\ui_screen_init.o"
+".\objects\ui_screen_menu.o"
 --strict --scatter ".\Objects\demo.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

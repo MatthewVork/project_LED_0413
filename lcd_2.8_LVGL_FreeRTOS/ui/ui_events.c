@@ -7,8 +7,10 @@
 #include "ui.h"
 #include "main.h"
 
-#define DEFAULT_BTN_COLOR lv_color_hex(0x333333)
-#define ACTIVE_BTN_COLOR  lv_color_hex(0xFF0000) // 红色
+#define DEFAULT_BTN_COLOR lv_color_hex(0x0078D7)	//默认蓝色
+#define ACTIVE_BTN_COLOR  lv_color_hex(0xFF0000)  //红色
+#define CONNECTED 1
+#define DISCONNECTED 0
 
 extern uint8_t current_mode;
 extern uint8_t input_flag;
@@ -16,85 +18,150 @@ extern uint8_t input_source;
 extern SemaphoreHandle_t xGuiMutex; // 引入锁
 extern uint8_t meteor_pos; // 🚀 把流星的位置变量也引进来
 
+void Reset_All_Mode_Buttons_Color(void)
+{
+    // 把 10 个模式按钮全部强行刷回默认颜色
+    lv_obj_set_style_bg_color(ui_Button_Red, 			DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_Yellow, 	DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_Blue, 		DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_Fire, 		DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_Meteor, 	DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_RainBow,	DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_Audio, 		DEFAULT_BTN_COLOR, 0);
+    lv_obj_set_style_bg_color(ui_Button_White, 		DEFAULT_BTN_COLOR, 0);
+}
+
+void hide_toast_timer_cb(lv_timer_t * timer)
+{
+    // 1. 从定时器里把咱们传进去的面板取出来
+    lv_obj_t * panel = (lv_obj_t *)timer->user_data;
+    
+    // 2. 给这个面板加上“隐藏”标志
+    if(panel != NULL) {
+        lv_obj_add_flag(panel, LV_OBJ_FLAG_HIDDEN);
+    }
+}
+
+void Highlight_Active_Button(lv_obj_t * active_btn)
+{
+	Reset_All_Mode_Buttons_Color();
+	lv_obj_set_style_bg_color(active_btn, ACTIVE_BTN_COLOR, 0);
+}
+
 void ui_event_click_Red(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
 		{
-			// 1. 洗掉所有按钮的红色
-			Reset_All_Mode_Buttons_Color();
-			
-			// 2. 唯独把自己染成红色！
-			lv_obj_set_style_bg_color(ui_Button1, ACTIVE_BTN_COLOR, 0);
-			
-			// 3. 执行你的底层模式切换逻辑
+			Highlight_Active_Button(lv_event_get_target(e));
 			current_mode = Red;
 			input_source = 3;  
-			input_flag = 1;    	
+			input_flag = 1;
+			lv_label_set_text(ui_Label_led_mode, "红色");
 		}
 }
 
 void ui_event_click_Blue(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		// 1. 洗掉所有按钮的红色
-		Reset_All_Mode_Buttons_Color();
-		
-		// 2. 唯独把自己染成红色！
-		lv_obj_set_style_bg_color(ui_Button1, ACTIVE_BTN_COLOR, 0);
-		
-		// 3. 执行你的底层模式切换逻辑
-		current_mode = Blue;
-		input_source = 3;  
-		input_flag = 1;    
-	}
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = Blue;
+			input_source = 3;  
+			input_flag = 1;
+			lv_label_set_text(ui_Label_led_mode, "蓝色");
+		}
 }
 
 void ui_event_click_Metor(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = Meteor;
-		input_source = 3;  
-		input_flag = 1;    
-	}
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = Meteor;
+			input_source = 3;  
+			input_flag = 1;
+			lv_label_set_text(ui_Label_led_mode, "流星");
+		}
 }
 
 void ui_event_click_Yellow(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = Yellow;
-		input_source = 3;  
-		input_flag = 1;    
-	}
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = Yellow;
+			input_source = 3;  
+			input_flag = 1;
+			lv_label_set_text(ui_Label_led_mode, "黄色");
+		}
 }
 
 void ui_event_click_Fire(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = Fire;
-		input_source = 3;  
-		input_flag = 1;    
-	}
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = Fire;
+			input_source = 3;  
+			input_flag = 1;    
+			lv_label_set_text(ui_Label_led_mode, "火焰");
+		}
 }
 
 void ui_event_click_RainBow(lv_event_t * e)
 {
 		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = Rainbow;
-		input_source = 3;  
-		input_flag = 1;    
-	}
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = Rainbow;
+			input_source = 3;  
+			input_flag = 1;    
+			lv_label_set_text(ui_Label_led_mode, "彩虹");
+		}
+}
+
+void ui_event_click_White(lv_event_t * e)
+{
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = White;
+			input_source = 3;  
+			input_flag = 1;    
+			lv_label_set_text(ui_Label_led_mode, "白色");
+		}
+}
+
+void ui_event_click_Audio(lv_event_t * e)
+{
+	if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+		{
+			Highlight_Active_Button(lv_event_get_target(e));
+			current_mode = Audio;
+			input_source = 3;  
+			input_flag = 1;    
+			lv_label_set_text(ui_Label_led_mode, "音频");
+		}
+}
+
+
+void ui_event_click_Off(lv_event_t * e)
+{
+		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+		{
+			Reset_All_Mode_Buttons_Color();
+			current_mode = Off;
+			input_source = 3;  
+			input_flag = 1;
+			lv_label_set_text(ui_Label_led_mode, "关闭");
+		}
 }
 
 void ui_event_Silder(lv_event_t * e)
 {
     if(lv_event_get_code(e) == LV_EVENT_RELEASED) 
     {
-        lv_obj_t * slider = lv_event_get_target(e);
+		lv_obj_t * slider = lv_event_get_target(e);
         int val = lv_slider_get_value(slider);
         
         // 修改全局亮度总闸
@@ -107,56 +174,148 @@ void ui_event_Silder(lv_event_t * e)
     }
 }
 
-void ui_event_click_Breathing(lv_event_t * e)
-{
-		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = Breath;
-		input_source = 3;  
-		input_flag = 1;    
-	}
-}
-
-void ui_event_click_White(lv_event_t * e)
-{
-		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = White;
-		input_source = 3;  
-		input_flag = 1;    
-	}
-}
-
-void ui_event_click_Off(lv_event_t * e)
-{
-		if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
-	{
-		current_mode = Off;
-		input_source = 3;  
-		input_flag = 1;    
-	}
-}
 
 void ui_event_click_Connect_Onenet(lv_event_t * e)
 {
-	// Your code here
+	if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+	{
+		static int Onenet_flag = 0;
+		
+		if(Onenet_flag)
+		{		
+			lv_obj_set_style_bg_color(ui_Button_Connect_Onenet, DEFAULT_BTN_COLOR, 0);
+			lv_label_set_text(ui_Label_Onenet_Status, " 未连接 ");
+			Onenet_flag = !Onenet_flag;
+		}
+		else
+		{
+			lv_obj_set_style_bg_color(ui_Button_Connect_Onenet, ACTIVE_BTN_COLOR, 0);
+			lv_label_set_text(ui_Label_Onenet_Status, " 已连接 ");
+			Onenet_flag = !Onenet_flag;
+		}
+		//后续为执行逻辑
+	}
 }
 
 void ui_event_click_Connect_Bluetooth(lv_event_t * e)
 {
-	// Your code here
+    if(lv_event_get_code(e) == LV_EVENT_CLICKED) 
+    {
+        if(GPIO_ReadOutputDataBit(GPIOA, GPIO_Pin_2) == 0) // 原逻辑：开启使能
+        {
+            GPIO_SetBits(GPIOA, GPIO_Pin_2); 
+            
+            // 🚀 核心补充：通知后台任务开始监测 PA3
+            bt_is_waiting = 1; 
+            bt_start_tick = xTaskGetTickCount(); // 记录当前时刻
+            
+            lv_label_set_text(ui_LabelMSG, " 正在连接蓝牙... ");
+            lv_obj_clear_flag(ui_Panel_ShowMSG, LV_OBJ_FLAG_HIDDEN); 
+        }
+        else // 原逻辑：主动关闭
+        {
+            GPIO_ResetBits(GPIOA, GPIO_Pin_2); 
+            bt_control_enabled = 0; 
+            bt_is_waiting = 0; // 取消判定
+            
+            lv_label_set_text(ui_LabelMSG, " 蓝牙已断开! ");
+            lv_obj_clear_flag(ui_Panel_ShowMSG, LV_OBJ_FLAG_HIDDEN);
+            lv_obj_set_style_bg_color(ui_Button_Connect_Bluetooth, DEFAULT_BTN_COLOR, 0);
+            lv_label_set_text(ui_Label_Bluetooth_Status, " 未连接 ");
+            
+            lv_timer_t * t = lv_timer_create(hide_toast_timer_cb, 2000, ui_Panel_ShowMSG);
+            lv_timer_set_repeat_count(t, 1);
+        }
+    }
 }
 
-void Reset_All_Mode_Buttons_Color(void)
+// 🚀 逻辑补全：连接失败（超时）反馈
+void Trigger_BT_Failure(void)
 {
-    // 把 10 个模式按钮全部强行刷回默认颜色
-    lv_obj_set_style_bg_color(ui_Button1, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button2, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button3, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button4, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button5, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button6, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button8, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button9, DEFAULT_BTN_COLOR, 0);
-    lv_obj_set_style_bg_color(ui_Button10, DEFAULT_BTN_COLOR, 0);
+    GPIO_ResetBits(GPIOA, GPIO_Pin_2); // 失败了就直接关掉 PA2 信号
+    bt_control_enabled = 0; 
+    
+    lv_label_set_text(ui_LabelMSG, " 连接超时! ");
+    lv_obj_set_style_bg_color(ui_Button_Connect_Bluetooth, DEFAULT_BTN_COLOR, 0); // 按钮恢复蓝色
+    lv_label_set_text(ui_Label_Bluetooth_Status, " 未连接 ");
+    
+    // 2秒后自动消失
+    lv_timer_t * t = lv_timer_create(hide_toast_timer_cb, 2000, ui_Panel_ShowMSG);
+    lv_timer_set_repeat_count(t, 1);
+}
+
+// 暴露给 main.c 调用的弹窗发射器 (1:连上, 0:断开)
+void Trigger_Bluetooth_Toast(uint8_t is_connected)
+{
+	if(is_connected)
+	{
+		lv_label_set_text(ui_LabelMSG, "蓝牙已连接!");
+		lv_obj_clear_flag(ui_Panel_ShowMSG, LV_OBJ_FLAG_HIDDEN);
+		bt_control_enabled = 1;
+		lv_obj_set_style_bg_color(ui_Button_Connect_Bluetooth, ACTIVE_BTN_COLOR, 0); // 变红
+		lv_label_set_text(ui_Label_Bluetooth_Status, " 已连接 ");
+    } 
+	else 
+	{
+        lv_label_set_text(ui_LabelMSG, "蓝牙已断开!");
+		lv_obj_clear_flag(ui_Panel_ShowMSG, LV_OBJ_FLAG_HIDDEN);
+		bt_control_enabled = 0;
+        lv_obj_set_style_bg_color(ui_Button_Connect_Bluetooth, DEFAULT_BTN_COLOR, 0); // 变蓝
+        lv_label_set_text(ui_Label_Bluetooth_Status, " 未连接 ");
+    }
+    // 2. 启动 2000ms 定时器，时间一到自动执行隐藏回调
+    lv_timer_t * t = lv_timer_create(hide_toast_timer_cb, 2000, ui_Panel_ShowMSG);
+    lv_timer_set_repeat_count(t, 1); // 极其关键：只执行一次
+}
+
+void Trigger_BT_Disconnected(void)
+{
+    bt_control_enabled = 0; // 核心：瞬间把锁关掉
+    
+    // UI 变化：显示断开提示，按钮恢复蓝色
+    lv_label_set_text(ui_LabelMSG, " 已断开连接! ");
+    lv_obj_clear_flag(ui_Panel_ShowMSG, LV_OBJ_FLAG_HIDDEN);
+    
+    lv_obj_set_style_bg_color(ui_Button_Connect_Bluetooth, DEFAULT_BTN_COLOR, 0); 
+    lv_label_set_text(ui_Label_Bluetooth_Status, " 未连接 ");
+    
+    // 2秒后自动消失
+    lv_timer_t * t = lv_timer_create(hide_toast_timer_cb, 2000, ui_Panel_ShowMSG);
+    lv_timer_set_repeat_count(t, 1);
+}
+
+// 🚀 逻辑补全：手机连接成功时的反馈
+void Trigger_BT_Success(void)
+{
+    bt_control_enabled = 1; // 核心：锁打开，允许接收手机指令 
+    
+    // 1. 弹窗 UI 变化：显示成功提示
+    lv_label_set_text(ui_LabelMSG, " 蓝牙连接成功! ");
+    lv_obj_clear_flag(ui_Panel_ShowMSG, LV_OBJ_FLAG_HIDDEN); // 确保面板显示
+    
+    // 2. 按钮 UI 变化：按钮变红，文字变成已连接
+    lv_obj_set_style_bg_color(ui_Button_Connect_Bluetooth, ACTIVE_BTN_COLOR, 0); 
+    lv_label_set_text(ui_Label_Bluetooth_Status, " 已连接 ");
+    
+    // 3. 启动定时器：2秒后自动隐藏弹窗面板
+    lv_timer_t * t = lv_timer_create(hide_toast_timer_cb, 2000, ui_Panel_ShowMSG);
+    lv_timer_set_repeat_count(t, 1);
+}
+
+// 🚀 新增：专门处理“手机遥控车机，车机屏幕跟着变”的同步函数
+void Sync_LCD_Light_Panel(uint8_t mode)
+{
+    Reset_All_Mode_Buttons_Color(); // 先把所有按钮都重置为默认颜色
+    switch(mode) 
+	{
+        case Red: 		Highlight_Active_Button(ui_Button_Red); 		break;
+        case Yellow: 	Highlight_Active_Button(ui_Button_Yellow);	break;
+        case Blue: 		Highlight_Active_Button(ui_Button_Blue);		break;
+				case Fire: 		Highlight_Active_Button(ui_Button_Fire);		break;
+        case Meteor: 	Highlight_Active_Button(ui_Button_Meteor);	break;
+				case Rainbow: Highlight_Active_Button(ui_Button_Rainbow);	break;
+				case Audio: 	Highlight_Active_Button(ui_Button_Audio);		break;
+				case White: 	Highlight_Active_Button(ui_Button_White);		break;
+				case 0: Reset_All_Mode_Buttons_Color(); 						break; // 关灯模式特殊处理：所有按钮都不高亮
+    }
 }

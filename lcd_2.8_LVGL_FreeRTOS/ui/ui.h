@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-#include "lvgl/lvgl.h"
+#include "../lvgl/lvgl.h"
 
 #include "ui_helpers.h"
 #include "ui_events.h"
@@ -23,54 +23,45 @@ extern lv_obj_t * ui_Label18;
 // SCREEN: ui_Screen_menu
 void ui_Screen_menu_screen_init(void);
 extern lv_obj_t * ui_Screen_menu;
-void ui_event_Button1(lv_event_t * e);
-extern lv_obj_t * ui_Button1;
+void ui_event_Button_Red(lv_event_t * e);
+extern lv_obj_t * ui_Button_Red;
 extern lv_obj_t * ui_Label1;
-void ui_event_Button2(lv_event_t * e);
-extern lv_obj_t * ui_Button2;
+void ui_event_Button_Blue(lv_event_t * e);
+extern lv_obj_t * ui_Button_Blue;
 extern lv_obj_t * ui_Label2;
-void ui_event_Button3(lv_event_t * e);
-extern lv_obj_t * ui_Button3;
+void ui_event_Button_Meteor(lv_event_t * e);
+extern lv_obj_t * ui_Button_Meteor;
 extern lv_obj_t * ui_Label3;
-void ui_event_Button4(lv_event_t * e);
-extern lv_obj_t * ui_Button4;
+void ui_event_Button_Yellow(lv_event_t * e);
+extern lv_obj_t * ui_Button_Yellow;
 extern lv_obj_t * ui_Label4;
-void ui_event_Button5(lv_event_t * e);
-extern lv_obj_t * ui_Button5;
+void ui_event_Button_Fire(lv_event_t * e);
+extern lv_obj_t * ui_Button_Fire;
 extern lv_obj_t * ui_Label5;
-void ui_event_Button6(lv_event_t * e);
-extern lv_obj_t * ui_Button6;
+void ui_event_Button_RainBow(lv_event_t * e);
+extern lv_obj_t * ui_Button_RainBow;
 extern lv_obj_t * ui_Label6;
 void ui_event_Slider1(lv_event_t * e);
 extern lv_obj_t * ui_Slider1;
-void ui_event_Button8(lv_event_t * e);
-extern lv_obj_t * ui_Button8;
+void ui_event_Button_Audio(lv_event_t * e);
+extern lv_obj_t * ui_Button_Audio;
 extern lv_obj_t * ui_Label8;
-void ui_event_Button9(lv_event_t * e);
-extern lv_obj_t * ui_Button9;
+void ui_event_Button_White(lv_event_t * e);
+extern lv_obj_t * ui_Button_White;
 extern lv_obj_t * ui_Label9;
-void ui_event_Button10(lv_event_t * e);
-extern lv_obj_t * ui_Button10;
+void ui_event_Button_Off(lv_event_t * e);
+extern lv_obj_t * ui_Button_Off;
 extern lv_obj_t * ui_Label10;
 extern lv_obj_t * ui_Label_brightness;
 void ui_event_Button_Connect_Onenet(lv_event_t * e);
 extern lv_obj_t * ui_Button_Connect_Onenet;
-extern lv_obj_t * ui_Label11;
+extern lv_obj_t * ui_Label_Onenet_Status;
 void ui_event_Button_Connect_Bluetooth(lv_event_t * e);
 extern lv_obj_t * ui_Button_Connect_Bluetooth;
-extern lv_obj_t * ui_Label13;
-extern lv_obj_t * ui_Panel_Connected_Bluetooth;
+extern lv_obj_t * ui_Label_Bluetooth_Status;
+extern lv_obj_t * ui_Panel_ShowMSG;
 extern lv_obj_t * ui_Panel2;
-extern lv_obj_t * ui_Label12;
-extern lv_obj_t * ui_Panel_Disonnected_Bluetooth;
-extern lv_obj_t * ui_Panel3;
-extern lv_obj_t * ui_Label15;
-extern lv_obj_t * ui_Panel_Connected_Net;
-extern lv_obj_t * ui_Panel4;
-extern lv_obj_t * ui_Label16;
-extern lv_obj_t * ui_Panel_Disconnected_Net;
-extern lv_obj_t * ui_Panel5;
-extern lv_obj_t * ui_Label17;
+extern lv_obj_t * ui_LabelMSG;
 extern lv_obj_t * ui_Label7;
 extern lv_obj_t * ui_Label14;
 extern lv_obj_t * ui_Label_time;

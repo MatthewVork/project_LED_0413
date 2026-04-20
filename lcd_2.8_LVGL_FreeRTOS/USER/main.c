@@ -5,6 +5,7 @@ uint8_t input_flag   = 0;  // 是否有新指令 (0:无, 1:有)
 uint8_t input_source = 0;  // 追踪器：1:蓝牙, 2:OneNET, 3:触摸屏
 
 volatile float global_brightness = 1.0f;
+volatile uint8_t bt_control_enabled = 0;  // 🚀 蓝牙鉴权锁 (0:锁死, 1:放行)
 
 uint8_t rainbow_offset = 0; 
 uint8_t meteor_pos = 0;  
@@ -15,7 +16,10 @@ uint8_t RX_Flag;
 
 uint8_t  g_esp8266_rx_buf[ESP_BUF_SIZE]; 
 uint32_t g_esp8266_rx_cnt = 0;           
-uint32_t g_esp8266_rx_end = 0;  
+uint32_t g_esp8266_rx_end = 0;
+
+volatile uint8_t bt_is_waiting = 0;    // 1: 正在等待手机连接蓝牙, 0: 闲置
+uint32_t bt_start_tick = 0;            // 记录按下按钮的时间戳
 
 // =====================================================================
 // [FreeRTOS 句柄声明]
@@ -48,7 +52,8 @@ int main(void)
     // 2. 硬件外设初始化
     WS2812_Init();
     Audio_ADC_Init();        
-//    BT_State_Pin_Init();     
+    BT_State_Pin_Init();
+    BT_EN_Control_Init();     
     Usart1_init(9600); 
     Usart3_init(115200); 
     LCD_Init();           
@@ -73,7 +78,7 @@ int main(void)
     // 创建三大任务 (堆栈大小根据实际需求调整，GUI给最大，通讯次之，灯光最小)
     xTaskCreate(Task_GUI,   "Task_GUI",   1024, NULL, 2, &Task_GUI_Handle);
     xTaskCreate(Task_LED,   "Task_LED",   256,  NULL, 3, &Task_LED_Handle);
-//    xTaskCreate(Task_Comms, "Task_Comms", 512,  NULL, 4, &Task_Comms_Handle);
+		xTaskCreate(Task_Comms, "Task_Comms", 512,  NULL, 4, &Task_Comms_Handle);
 
 //    // 创建心跳定时器 (周期 10000ms = 10秒，自动重载 pdTRUE)
 //    Timer_Heartbeat_Handle = xTimerCreate("Heartbeat", pdMS_TO_TICKS(10000), pdTRUE, 0, Timer_Heartbeat_Callback);
@@ -150,136 +155,113 @@ void Task_LED(void *pvParameters)
     }
 }
 
+
 // =====================================================================
 // 3：通讯解析处理来自蓝牙和云端的指令，并更新 current_mode 和 input_flag
 // =====================================================================
 void Task_Comms(void *pvParameters)
 {
-    static uint8_t last_bt_state = 1;
+    vTaskDelay(pdMS_TO_TICKS(5500));
+    static uint8_t last_bt_state;
+    last_bt_state = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_3);
 	
-		printf("\r\n>> [Network Task] Starting ESP8266 & OneNET Init...\r\n");
-    esp8266_mqtt_init(); 
-    printf(">> [Network Task] Connection Success! Waiting for commands...\r\n");
-    
     while(1)
     {
-        // -------------------------------------------------------------
-        // [源头 A] 蓝牙状态机与指令
-        // -------------------------------------------------------------
-        uint8_t current_bt_state = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_3);
-        if (last_bt_state == 1 && current_bt_state == 0) {
-            WS2812_BlinkRed_Twice(); current_mode = 0; 
-        } else if (last_bt_state == 0 && current_bt_state == 1) {
-            WS2812_BlinkGreen_Twice();
-        }
-        last_bt_state = current_bt_state; 
-
-        if(RX_Flag) {
-            switch(RX_Command - 48) {
-                case Off:     current_mode = Off;     break; 
-                case White:   current_mode = White;   break; 
-                case Red:     current_mode = Red;     break; 
-                case Yellow:  current_mode = Yellow;  break; 
-                case Blue:    current_mode = Blue;    break; 
-                case Fire:    current_mode = Fire;    break; 
-                case Breath:  current_mode = Breath;  break; 
-                case Audio:   current_mode = Audio;   break; 
-                case Meteor:  current_mode = Meteor;  break;
-                case Rainbow: current_mode = Rainbow; break;
-                default: break;
+        uint8_t current_bt_state = GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_3); // 读大门状态
+        
+        // =============================================================
+        // 场景 A：你点了按钮，系统正在“卡着秒表”等连接
+        // =============================================================
+        if (bt_is_waiting == 1) 
+        {
+            if (current_bt_state == 1) // 15秒内手机连上了！
+            {
+                bt_is_waiting = 0;
+                if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+                    Trigger_BT_Success(); 
+                    xSemaphoreGive(xGuiMutex);
+                }
             }
-            input_source = 1; input_flag = 1; 
+            else if ((xTaskGetTickCount() - bt_start_tick) > pdMS_TO_TICKS(15000)) // 15秒超时没连上
+            {
+                bt_is_waiting = 0;
+                if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+                    Trigger_BT_Failure(); 
+                    xSemaphoreGive(xGuiMutex);
+                }
+            }
+        }
+        // =============================================================
+        // 场景 B：平时闲置/挂机状态（核心修复区：手机自己乱动的情况）
+        // =============================================================
+        else 
+        {
+            // 🚀 修复 1：手机自己连上了（原本没连，突然连了）
+            if (last_bt_state == 0 && current_bt_state == 1) 
+            {
+                if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+                    Trigger_BT_Success(); // 直接复用成功函数，弹窗+按钮变红
+                    xSemaphoreGive(xGuiMutex);
+                }
+                printf(">> [后台巡逻] 手机主动连上了蓝牙！\r\n");
+            }
+            
+            // 🚀 修复 2：手机自己断开了（原本连着，突然断了，比如走远了/关蓝牙了）
+            else if (last_bt_state == 1 && current_bt_state == 0) 
+            {
+                WS2812_BlinkRed_Twice(); 
+                current_mode = 0;        
+                
+                if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+                    Trigger_BT_Disconnected(); // 呼叫一个专门的断开函数
+                    xSemaphoreGive(xGuiMutex);
+                }
+                printf(">> [后台巡逻] 手机主动断开了蓝牙！\r\n");
+            }
+        }
+        
+        // 🚀 最关键的一句：保安把当前状态记在小本本上，为下一次循环做对比
+        last_bt_state = current_bt_state; 
+        // =============================================================
+        // 第二部分：处理蓝牙控制指令 (恢复你的完美架构！)
+        // =============================================================
+        if (RX_Flag == 1) // 中断里收到数据了
+        {
+            // 必须是 UI 处于“已授权”状态，才允许修改灯光！
+            if (bt_control_enabled == 1) 
+            {
+                // 🚀 1. 纯逻辑切换：只改状态，绝不越权碰底层硬件！
+                switch(RX_Command) {
+                    // 注意：这里的 Red, Blue, Meteor 等是你之前定义的枚举宏
+                    case '1': current_mode = Red;     break; // 红
+                    case '2': current_mode = Yellow;  break; // 黄
+                    case '3': current_mode = Blue;    break; // 蓝
+                    case '4': current_mode = Fire;    break; // 火焰
+                    case '5': current_mode = Meteor;  meteor_pos = 0; break; // 流星
+                    case '6': current_mode = Rainbow; break; // 彩虹
+                    case '7': current_mode = Audio;   break; // 音乐律动
+                    case '8': current_mode = White;   break; // 白色
+                    case '0': current_mode = Off;     break; // 关灯
+                }
+                
+                // 🚀 2. 状态追踪：恢复你原本写好的追踪器逻辑
+                input_source = 1; // 标记来源：1 代表当前指令来自蓝牙
+                input_flag = 1;   // 标记有新指令产生
+                
+                // 🚀 3. 呼叫 UI 部门：蓝牙改了颜色，LCD 面板必须同步更新！
+                // (防止手机上切了红色，LCD 屏幕上显示的还是蓝色)
+                if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+                    // 调用你之前写好的 LCD 灯光面板更新逻辑
+                    // 比如：Sync_LCD_Light_Panel(current_mode); 
+                    Sync_LCD_Light_Panel(current_mode);
+                    xSemaphoreGive(xGuiMutex);
+                }
+            }
+            // 清除标志位，等待下一个指令
             RX_Flag = 0; 
         }
 
-        // -------------------------------------------------------------
-        // [源头 B] OneNET 云端软断帧与解析
-        // -------------------------------------------------------------
-        if (g_esp8266_rx_cnt > 0 && g_esp8266_rx_end == 0) {
-            static uint32_t rx_wait_time = 0;
-            static uint32_t last_cnt = 0;
-            if (g_esp8266_rx_cnt != last_cnt) {
-                last_cnt = g_esp8266_rx_cnt;
-                rx_wait_time = xTaskGetTickCount(); // 用 OS 的时间戳
-            } else if ((xTaskGetTickCount() - rx_wait_time) >= pdMS_TO_TICKS(30)) {
-                g_esp8266_rx_end = 1;  
-                last_cnt = 0;          
-            }
-        }
-                
-        if (g_esp8266_rx_end == 1) { 
-            char *json_start = NULL;
-            for (int i = 0; i < g_esp8266_rx_cnt; i++) {
-                if (g_esp8266_rx_buf[i] == '{') { json_start = (char *)&g_esp8266_rx_buf[i]; break; }
-            }
-
-            if (json_start != NULL) {
-                char msg_id[20] = {0};
-                char *id_p = strstr(json_start, "\"id\":"); 
-                if(id_p) {
-                    id_p += 5; 
-                    while(*id_p == ' ' || *id_p == '\"' || *id_p == ':') id_p++; 
-                    for(int i = 0; i < 19; i++) {
-                        if(id_p[i] == '\"' || id_p[i] == ',' || id_p[i] == '}' || id_p[i] == ' ') break; 
-                        msg_id[i] = id_p[i];
-                    }
-                }
-
-                uint8_t cmd_executed = 0;
-                if     (strstr(json_start, "\"WorkMode\":0")) { current_mode = Off;     cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":1")) { current_mode = White;   cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":2")) { current_mode = Red;     cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":3")) { current_mode = Yellow;  cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":4")) { current_mode = Blue;    cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":5")) { current_mode = Fire;    cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":6")) { current_mode = Breath;  cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":7")) { current_mode = Audio;   cmd_executed = 1; }
-                else if(strstr(json_start, "\"WorkMode\":8")) { current_mode = Meteor;  cmd_executed = 1; meteor_pos = 0;}
-                else if(strstr(json_start, "\"WorkMode\":9")) { current_mode = Rainbow; cmd_executed = 1; }
-
-                if(cmd_executed) {
-                    input_source = 2; input_flag = 1; 
-                    if(msg_id[0] != '\0') { mqtt_reply_set_command(msg_id); }
-                }
-            } 
-            memset((void *)g_esp8266_rx_buf, 0, ESP_BUF_SIZE); 
-            g_esp8266_rx_cnt = 0; g_esp8266_rx_end = 0; 
-        }
-
-        // -------------------------------------------------------------
-        // [中心打印台] 统一输出情报
-        // -------------------------------------------------------------
-//        if (input_flag == 1) 
-//        {
-//            if      (input_source == 1) printf("[指令来源] >>> 蓝牙端 (Bluetooth)\r\n");
-//            else if (input_source == 2) printf("[指令来源] >>> 云平台 (OneNET)\r\n");
-//            else if (input_source == 3) printf("[指令来源] >>> 触摸屏 (LVGL UI)\r\n");
-
-//            printf("[执行动作] >>> ");
-//            switch(current_mode) {
-//                case Off:       printf("关闭氛围灯 (OFF)\r\n"); break;
-//                case White:     printf("切换为: 白色常亮\r\n"); break;
-//                case Red:       printf("切换为: 红色常亮\r\n"); break;
-//                case Yellow:    printf("切换为: 黄色常亮\r\n"); break;
-//                case Blue:      printf("切换为: 蓝色常亮\r\n"); break;
-//                case Fire:      printf("切换为: 火焰 (Fire)\r\n"); break;
-//                case Breath:    printf("切换为: 呼吸灯 (Breathing)\r\n"); break;
-//                case Audio:     printf("切换为: 音乐律动 (Audio Sync)\r\n"); break;
-//                case Meteor:    printf("切换为: 流星雨 (Meteor)\r\n"); break;
-//                case Rainbow:   printf("切换为: 彩虹渐变 (Rainbow)\r\n"); break;
-//                default:printf("未知模式\r\n"); break;
-//            }
-//						
-//						if(input_source == 1 || input_source == 3) 
-//						{
-//							 mqtt_upload_current_state();
-//							 printf(">> [Sync] State synchronized to OneNET!\r\n");
-//            }
-
-//            input_flag = 0; input_source = 0;
-//        }
-
-        vTaskDelay(pdMS_TO_TICKS(10)); // 防止通讯任务饿死低优先级任务
+        vTaskDelay(pdMS_TO_TICKS(20)); 
     }
 }
 
@@ -288,8 +270,8 @@ void Task_Comms(void *pvParameters)
 // =====================================================================
 void Timer_Heartbeat_Callback(TimerHandle_t xTimer)
 {
-    mqtt_send_heart();
-		mqtt_upload_current_state();
+//    mqtt_send_heart();
+//		mqtt_upload_current_state();
 }
 
 // =====================================================================
