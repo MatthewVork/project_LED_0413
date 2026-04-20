@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-#include "../lvgl/lvgl.h"
+#include "lvgl/lvgl.h"
 
 #include "ui_helpers.h"
 #include "ui_events.h"
@@ -53,9 +53,6 @@ void ui_event_Button_Off(lv_event_t * e);
 extern lv_obj_t * ui_Button_Off;
 extern lv_obj_t * ui_Label10;
 extern lv_obj_t * ui_Label_brightness;
-void ui_event_Button_Connect_Onenet(lv_event_t * e);
-extern lv_obj_t * ui_Button_Connect_Onenet;
-extern lv_obj_t * ui_Label_Onenet_Status;
 void ui_event_Button_Connect_Bluetooth(lv_event_t * e);
 extern lv_obj_t * ui_Button_Connect_Bluetooth;
 extern lv_obj_t * ui_Label_Bluetooth_Status;
@@ -69,6 +66,7 @@ extern lv_obj_t * ui_Label19;
 extern lv_obj_t * ui_Label20;
 extern lv_obj_t * ui_Label21;
 extern lv_obj_t * ui_Label_led_mode;
+extern lv_obj_t * ui_Label_Onenet_Status;
 extern lv_obj_t * ui____initial_actions0;
 
 

@@ -21,13 +21,13 @@ void esp8266_init(void)
 
 void esp8266_send_at(char *str)
 {
-	//清空接收缓冲区
+	//锟斤拷战锟斤拷栈锟斤拷锟斤拷锟?
 	memset((void *)g_esp8266_rx_buf,0, sizeof g_esp8266_rx_buf);
 	
-	//清空接收计数值
+	//锟斤拷战锟斤拷占锟斤拷锟街?
 	g_esp8266_rx_cnt = 0;	
 	
-	//串口3发送数据
+	//锟斤拷锟斤拷3锟斤拷锟斤拷锟斤拷锟斤拷
 	usart3_send_str(str);
 }
 
@@ -43,13 +43,13 @@ void esp8266_send_str(char *buf)
 
 }
 
-/* 查找接收数据包中的字符串 */
+/* 锟斤拷锟揭斤拷锟斤拷锟斤拷锟捷帮拷锟叫碉拷锟街凤拷锟斤拷 */
 int32_t esp8266_find_str_in_rx_packet(char *str,uint32_t timeout)
 {
 	char *dest = str;
 	char *src  = (char *)&g_esp8266_rx_buf;
 	
-	//等待串口接收完毕或超时退出
+	//锟饺达拷锟斤拷锟节斤拷锟斤拷锟斤拷匣锟绞憋拷顺锟?
 	while((strstr(src,dest)==NULL) && timeout)
 	{		
 		delay_ms(1);
@@ -63,7 +63,7 @@ int32_t esp8266_find_str_in_rx_packet(char *str,uint32_t timeout)
 }
 
 
-/* 自检程序 */
+/* 锟皆硷拷锟斤拷锟? */
 int32_t  esp8266_self_test(void)
 {
 	esp8266_send_at("AT\r\n");
@@ -72,99 +72,99 @@ int32_t  esp8266_self_test(void)
 }
 
 /**
- * 功能：连接热点
- * 参数：
- *         ssid:热点名
- *         pwd:热点密码
- * 返回值：
- *         连接结果,非0连接成功,0连接失败
- * 说明： 
- *         失败的原因有以下几种(UART通信和ESP8266正常情况下)
- *         1. WIFI名和密码不正确
- *         2. 路由器连接设备太多,未能给ESP8266分配IP
+ * 锟斤拷锟杰ｏ拷锟斤拷锟斤拷锟饺碉拷
+ * 锟斤拷锟斤拷锟斤拷
+ *         ssid:锟饺碉拷锟斤拷
+ *         pwd:锟饺碉拷锟斤拷锟斤拷
+ * 锟斤拷锟斤拷值锟斤拷
+ *         锟斤拷锟接斤拷锟?,锟斤拷0锟斤拷锟接成癸拷,0锟斤拷锟斤拷失锟斤拷
+ * 说锟斤拷锟斤拷 
+ *         失锟杰碉拷原锟斤拷锟斤拷锟斤拷锟铰硷拷锟斤拷(UART通锟脚猴拷ESP8266锟斤拷锟斤拷锟斤拷锟斤拷锟?)
+ *         1. WIFI锟斤拷锟斤拷锟斤拷锟诫不锟斤拷确
+ *         2. 路锟斤拷锟斤拷锟斤拷锟斤拷锟借备太锟斤拷,未锟杰革拷ESP8266锟斤拷锟斤拷IP
  */
 int32_t esp8266_connect_ap(char* ssid,char* pswd)
 {
-    // 1. 设置为 STATION 模式
+    // 1. 锟斤拷锟斤拷为 STATION 模式
     esp8266_send_at("AT+CWMODE_CUR=1\r\n"); 
     if(esp8266_find_str_in_rx_packet("OK",1000))
         return -1;
 
-    // 2. 发送连接指令 (这段连续发送极易被截断，咱们保留你的原格式，但确保查杀准确)
+    // 2. 锟斤拷锟斤拷锟斤拷锟斤拷指锟斤拷 (锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷图锟斤拷妆锟斤拷囟希锟斤拷锟斤拷潜锟斤拷锟斤拷锟斤拷原锟斤拷式锟斤拷锟斤拷确锟斤拷锟斤拷杀准确)
     esp8266_send_at("AT+CWJAP_CUR="); 
     esp8266_send_at("\"");esp8266_send_at(ssid);esp8266_send_at("\"");	
     esp8266_send_at(",");	
     esp8266_send_at("\"");esp8266_send_at(pswd);esp8266_send_at("\"");	
     esp8266_send_at("\r\n");
     
-    // 3. ?? 终极修复：死等 "GOT IP" 字符串，绝不抓取带有歧义的 "CONNECT"
-    // 最长等待 8 秒，如果连不上（比如热点没开），它超时后会乖乖返回 -2
+    // 3. ?? 锟秸硷拷锟睫革拷锟斤拷锟斤拷锟斤拷 "GOT IP" 锟街凤拷锟斤拷锟斤拷锟斤拷锟斤拷抓取锟斤拷锟斤拷锟斤拷锟斤拷锟? "CONNECT"
+    // 锟筋长锟饺达拷 8 锟诫，锟斤拷锟斤拷锟斤拷锟斤拷希锟斤拷锟斤拷锟斤拷鹊锟矫伙拷锟斤拷锟斤拷锟斤拷锟斤拷锟绞憋拷锟斤拷怨苑锟斤拷锟? -2
     if(esp8266_find_str_in_rx_packet("GOT IP", 8000) == 0) {
-        return 0; // 成功拿到 IP
+        return 0; // 锟缴癸拷锟矫碉拷 IP
     }
 
-    return -2; // 超时或失败
+    return -2; // 锟斤拷时锟斤拷失锟斤拷
 }
 
-/* 退出透传模式 */
+/* 锟剿筹拷透锟斤拷模式 */
 int32_t esp8266_exit_transparent_transmission (void)
 {
 
 	esp8266_send_at ("+++");
 	
 
-	//退出透传模式，发送下一条AT指令要间隔1秒
+	//锟剿筹拷透锟斤拷模式锟斤拷锟斤拷锟斤拷锟斤拷一锟斤拷AT指锟斤拷要锟斤拷锟?1锟斤拷
 	delay_s(1); 
 
-	//记录当前esp8266工作在非透传模式
+	//锟斤拷录锟斤拷前esp8266锟斤拷锟斤拷锟节凤拷透锟斤拷模式
 	g_esp8266_transparent_transmission_sta = 0;
 
 	return 0;
 }
 
-/* 进入透传模式 */
+/* 锟斤拷锟斤拷透锟斤拷模式 */
 int32_t  esp8266_entry_transparent_transmission(void)
 {
-	//进入透传模式
+	//锟斤拷锟斤拷透锟斤拷模式
 	esp8266_send_at("AT+CIPMODE=1\r\n");  
 	if(esp8266_find_str_in_rx_packet("OK",5000))
 		return -1;
 	
 	delay_s(2);
-	//开启发送状态
+	//锟斤拷锟斤拷锟斤拷锟斤拷状态
 	esp8266_send_at("AT+CIPSEND\r\n");
 	if(esp8266_find_str_in_rx_packet("OK",5000))
 		return -2;
 
-	//记录当前esp8266工作在透传模式
+	//锟斤拷录锟斤拷前esp8266锟斤拷锟斤拷锟斤拷透锟斤拷模式
 	g_esp8266_transparent_transmission_sta = 1;
 	return 0;
 }
 
 /**
- * 功能：使用指定协议(TCP/UDP)连接到服务器
- * 参数：
- *         mode:协议类型 "TCP","UDP"
- *         ip:目标服务器IP
- *         port:目标是服务器端口号
- * 返回值：
- *         连接结果,非0连接成功,0连接失败
- * 说明： 
- *         失败的原因有以下几种(UART通信和ESP8266正常情况下)
- *         1. 远程服务器IP和端口号有误
- *         2. 未连接AP
- *         3. 服务器端禁止添加(一般不会发生)
+ * 锟斤拷锟杰ｏ拷使锟斤拷指锟斤拷协锟斤拷(TCP/UDP)锟斤拷锟接碉拷锟斤拷锟斤拷锟斤拷
+ * 锟斤拷锟斤拷锟斤拷
+ *         mode:协锟斤拷锟斤拷锟斤拷 "TCP","UDP"
+ *         ip:目锟斤拷锟斤拷锟斤拷锟絀P
+ *         port:目锟斤拷锟角凤拷锟斤拷锟斤拷锟剿口猴拷
+ * 锟斤拷锟斤拷值锟斤拷
+ *         锟斤拷锟接斤拷锟?,锟斤拷0锟斤拷锟接成癸拷,0锟斤拷锟斤拷失锟斤拷
+ * 说锟斤拷锟斤拷 
+ *         失锟杰碉拷原锟斤拷锟斤拷锟斤拷锟铰硷拷锟斤拷(UART通锟脚猴拷ESP8266锟斤拷锟斤拷锟斤拷锟斤拷锟?)
+ *         1. 远锟教凤拷锟斤拷锟斤拷IP锟酵端口猴拷锟斤拷锟斤拷
+ *         2. 未锟斤拷锟斤拷AP
+ *         3. 锟斤拷锟斤拷锟斤拷锟剿斤拷止锟斤拷锟斤拷(一锟姐不锟结发锟斤拷)
  */
 int32_t esp8266_connect_server(char* mode,char* ip,uint16_t port)
 {
 
 #if 0	
-	//使用MQTT传递的ip地址过长，不建议使用以下方法，否则导致栈溢出
-	//AT+CIPSTART="TCP","a10tC4OAAPc.iot-as-mqtt.cn-shanghai.aliyuncs.com",1883，该字符串占用内存过多了
+	//使锟斤拷MQTT锟斤拷锟捷碉拷ip锟斤拷址锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷使锟斤拷锟斤拷锟铰凤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷栈锟斤拷锟?
+	//AT+CIPSTART="TCP","a10tC4OAAPc.iot-as-mqtt.cn-shanghai.aliyuncs.com",1883锟斤拷锟斤拷锟街凤拷锟斤拷占锟斤拷锟节达拷锟斤拷锟斤拷锟?
 	
 	char buf[128]={0};
 	
-	//连接服务器
+	//锟斤拷锟接凤拷锟斤拷锟斤拷
 	sprintf((char*)buf,"AT+CIPSTART=\"%s\",\"%s\",%d\r\n",mode,ip,port);
 	
 	esp8266_send_at(buf);
@@ -188,7 +188,7 @@ int32_t esp8266_connect_server(char* mode,char* ip,uint16_t port)
 	return 0;
 }
 
-/* 断开服务器 */
+/* 锟较匡拷锟斤拷锟斤拷锟斤拷 */
 int32_t esp8266_disconnect_server(void)
 {
 	esp8266_send_at("AT+CIPCLOSE\r\n");
@@ -201,7 +201,7 @@ int32_t esp8266_disconnect_server(void)
 }
 
 
-/* 使能多链接 */
+/* 使锟杰讹拷锟斤拷锟斤拷 */
 int32_t esp8266_enable_multiple_id(uint32_t b)
 {
 
@@ -216,7 +216,7 @@ int32_t esp8266_enable_multiple_id(uint32_t b)
 	return 0;
 }
 
-/* 创建服务器 */
+/* 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷 */
 int32_t esp8266_create_server(uint16_t port)
 {
 	char buf[32]={0};
@@ -230,7 +230,7 @@ int32_t esp8266_create_server(uint16_t port)
 	return 0;
 }
 
-/* 关闭服务器 */
+/* 锟截闭凤拷锟斤拷锟斤拷 */
 int32_t esp8266_close_server(uint16_t port)
 {
 	char buf[32]={0};
@@ -244,7 +244,7 @@ int32_t esp8266_close_server(uint16_t port)
 	return 0;
 }
 
-/* 回显打开或关闭 */
+/* 锟斤拷锟皆打开伙拷乇锟? */
 int32_t esp8266_enable_echo(uint32_t b)
 {
 	if(b)
@@ -258,7 +258,7 @@ int32_t esp8266_enable_echo(uint32_t b)
 	return 0;
 }
 
-/* 复位 */
+/* 锟斤拷位 */
 int32_t esp8266_reset(void)
 {
 	esp8266_send_at("AT+RST\r\n");
@@ -267,4 +267,46 @@ int32_t esp8266_reset(void)
 		return -1;
 
 	return 0;
+}
+
+
+// 馃殌 缁堟瀬瀹夊叏鐗堬細鑾峰彇缃戠粶鐪熷疄鏃堕棿 (NTP)
+int32_t esp8266_get_network_time(uint16_t *year, uint8_t *month, uint8_t *day, uint8_t *hour, uint8_t *min, uint8_t *sec)
+{
+    // 閰嶇疆鏃跺尯(涓?8鍖?)鍜? NTP 鏈嶅姟鍣?
+    esp8266_send_at("AT+CIPSNTPCFG=1,8,\"ntp1.aliyun.com\"\r\n");
+    delay_ms(500);
+
+    for (int i = 0; i < 5; i++) {
+        esp8266_send_at("AT+CIPSNTPTIME?\r\n");
+        
+        if (esp8266_find_str_in_rx_packet("OK", 2000) == 0) {
+            char *time_ptr = strstr((char *)g_esp8266_rx_buf, "+CIPSNTPTIME:");
+            
+            if (time_ptr != NULL) {
+                char week[4] = {0}, month_str[4] = {0};
+                int p_year, p_day, p_hour, p_min, p_sec;
+                
+                // 鍒╃敤 sscanf 鑷?鍔ㄦ彁鍙栨姤鏂? (棰勬湡鏍煎紡: +CIPSNTPTIME:Mon Apr 20 18:07:00 2026)
+                int matched = sscanf(time_ptr, "+CIPSNTPTIME:%3s %3s %d %d:%d:%d %d", 
+                                     week, month_str, &p_day, &p_hour, &p_min, &p_sec, &p_year);
+                                     
+                if (matched == 7 && p_year != 1970) {
+                    *year = p_year; *day = p_day; *hour = p_hour; *min = p_min; *sec = p_sec;
+                    
+                    // 杞?鎹㈣嫳鏂囨湀浠?
+                    const char *months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
+                    for(int m = 0; m < 12; m++) {
+                        if(strcmp(month_str, months[m]) == 0) {
+                            *month = m + 1;
+                            break;
+                        }
+                    }
+                    return 0; // 瑙ｆ瀽鎴愬姛锛?
+                }
+            }
+        }
+        delay_ms(1000); // 娌℃嬁鍒帮紝绛?1绉掑啀璇?
+    }
+    return -1; // 褰诲簳澶辫触
 }

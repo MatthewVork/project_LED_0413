@@ -34,4 +34,12 @@ extern void mqtt_report_devices_status(void);
 extern void mqtt_reply_set_command(char *msg_id);
 extern void mqtt_upload_current_state(void);
 
+extern uint16_t sys_year;
+extern uint8_t  sys_month;
+extern uint8_t  sys_day;
+extern uint8_t  sys_hour;
+extern uint8_t  sys_min;
+extern uint8_t  sys_sec;
+extern uint8_t  time_synced;
+
 #endif

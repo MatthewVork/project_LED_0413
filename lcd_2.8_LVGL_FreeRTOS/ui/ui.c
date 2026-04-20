@@ -49,9 +49,6 @@ void ui_event_Button_Off(lv_event_t * e);
 lv_obj_t * ui_Button_Off;
 lv_obj_t * ui_Label10;
 lv_obj_t * ui_Label_brightness;
-void ui_event_Button_Connect_Onenet(lv_event_t * e);
-lv_obj_t * ui_Button_Connect_Onenet;
-lv_obj_t * ui_Label_Onenet_Status;
 void ui_event_Button_Connect_Bluetooth(lv_event_t * e);
 lv_obj_t * ui_Button_Connect_Bluetooth;
 lv_obj_t * ui_Label_Bluetooth_Status;
@@ -65,6 +62,7 @@ lv_obj_t * ui_Label19;
 lv_obj_t * ui_Label20;
 lv_obj_t * ui_Label21;
 lv_obj_t * ui_Label_led_mode;
+lv_obj_t * ui_Label_Onenet_Status;
 lv_obj_t * ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -156,14 +154,6 @@ void ui_event_Button_Off(lv_event_t * e)
     lv_obj_t * target = lv_event_get_target(e);
     if(event_code == LV_EVENT_CLICKED) {
         ui_event_click_Off(e);
-    }
-}
-void ui_event_Button_Connect_Onenet(lv_event_t * e)
-{
-    lv_event_code_t event_code = lv_event_get_code(e);
-    lv_obj_t * target = lv_event_get_target(e);
-    if(event_code == LV_EVENT_CLICKED) {
-        ui_event_click_Connect_Onenet(e);
     }
 }
 void ui_event_Button_Connect_Bluetooth(lv_event_t * e)

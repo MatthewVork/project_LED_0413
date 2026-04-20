@@ -70,5 +70,6 @@ extern void Trigger_Bluetooth_Toast(uint8_t is_connected);
 extern void Trigger_BT_Disconnected(void);
 extern void Trigger_BT_Success(void);
 extern void Sync_LCD_Light_Panel(uint8_t mode);
+extern void Timer_Clock_Callback(TimerHandle_t xTimer);
 
 #endif

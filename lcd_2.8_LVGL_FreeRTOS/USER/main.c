@@ -25,14 +25,28 @@ volatile uint8_t bt_is_waiting = 0;    // 1: 正在等待手机连接蓝牙, 0: 
 uint32_t bt_start_tick = 0;            // 记录按下按钮的时间戳
 
 // =====================================================================
+// 🚀 全局时间变量与时钟引擎
+// =====================================================================
+uint16_t sys_year = 2026; // 默认开机日期
+uint8_t  sys_month = 4;
+uint8_t  sys_day   = 20;
+uint8_t  sys_hour = 12; 
+uint8_t  sys_min  = 0;
+uint8_t  sys_sec  = 0;
+
+uint8_t time_synced = 0; // 0:未同步(显示横杠), 1:已同步(显示数字)
+
+// 每个月的天数表 (平年)
+const uint8_t days_in_month[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+// =====================================================================
 // [FreeRTOS 句柄声明]
 // =====================================================================
 SemaphoreHandle_t xGuiMutex;            // UI 互斥锁
-
 TaskHandle_t Task_GUI_Handle;           // 任务句柄：刷屏
 TaskHandle_t Task_LED_Handle;           // 任务句柄：灯效
 TaskHandle_t Task_Comms_Handle;         // 任务句柄：通讯
-
+TimerHandle_t Timer_Clock_Handle;       // 时钟定时器句柄
 TimerHandle_t Timer_Heartbeat_Handle;   // 软件定时器句柄：心跳
 
 // =====================================================================
@@ -82,6 +96,11 @@ int main(void)
     xTaskCreate(Task_GUI,   "Task_GUI",   1024, NULL, 2, &Task_GUI_Handle);
     xTaskCreate(Task_LED,   "Task_LED",   256,  NULL, 3, &Task_LED_Handle);
     xTaskCreate(Task_Comms, "Task_Comms", 512,  NULL, 4, &Task_Comms_Handle);
+
+    Timer_Clock_Handle = xTimerCreate("Clock", pdMS_TO_TICKS(1000), pdTRUE, 0, Timer_Clock_Callback);
+    if(Timer_Clock_Handle != NULL) {
+        xTimerStart(Timer_Clock_Handle, 0); 
+    }
 
     // 启动调度器，接管控制权
     vTaskStartScheduler();
@@ -307,6 +326,55 @@ void Task_Comms(void *pvParameters)
         }
 
         vTaskDelay(pdMS_TO_TICKS(20)); 
+    }
+}
+
+// =====================================================================
+// 🚀 时钟滴答回调函数 (1秒执行1次)
+// =====================================================================
+void Timer_Clock_Callback(TimerHandle_t xTimer)
+{
+    // 1. 手工打造的时间与日期进位逻辑
+    sys_sec++;
+    if(sys_sec >= 60) { sys_sec = 0; sys_min++; }
+    if(sys_min >= 60) { sys_min = 0; sys_hour++; }
+    
+    if(sys_hour >= 24) { 
+        sys_hour = 0; 
+        sys_day++;
+        
+        // 判定月底进位
+        uint8_t max_days = days_in_month[sys_month];
+        // 简单的闰年判定 (4年一闰且非百年)
+        if(sys_month == 2 && ((sys_year % 4 == 0 && sys_year % 100 != 0) || (sys_year % 400 == 0))) {
+            max_days = 29;
+        }
+        
+        if(sys_day > max_days) {
+            sys_day = 1;
+            sys_month++;
+        }
+        
+        // 判定年底进位
+        if(sys_month > 12) {
+            sys_month = 1;
+            sys_year++;
+        }
+    }
+
+    // 2. 刷新到 LCD 屏幕 (智能遮掩设计)
+    if (xSemaphoreTake(xGuiMutex, portMAX_DELAY) == pdTRUE) {
+        
+        // ⚠️ 注意：请把 ui_Label_Time 换成你 SquareLine 里实际的时间 Label 名字！
+        if (time_synced == 0) {
+            // 还没连上 WiFi，保持神秘感
+            lv_label_set_text(ui_Label_time, "----/--/-- --:--:--"); 
+        } else {
+            // 拿到真实时间了，正常跳字
+            lv_label_set_text_fmt(ui_Label_time, "%04d-%02d-%02d %02d:%02d:%02d", 
+                                  sys_year, sys_month, sys_day, sys_hour, sys_min, sys_sec);
+        }
+        xSemaphoreGive(xGuiMutex);
     }
 }
 

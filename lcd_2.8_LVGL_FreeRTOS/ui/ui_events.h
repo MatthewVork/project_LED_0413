@@ -20,7 +20,6 @@ void ui_event_Silder(lv_event_t * e);
 void ui_event_click_Audio(lv_event_t * e);
 void ui_event_click_White(lv_event_t * e);
 void ui_event_click_Off(lv_event_t * e);
-void ui_event_click_Connect_Onenet(lv_event_t * e);
 void ui_event_click_Connect_Bluetooth(lv_event_t * e);
 
 #ifdef __cplusplus

@@ -164,21 +164,6 @@ void ui_Screen_menu_screen_init(void)
     lv_label_set_text(ui_Label_brightness, "100%");
     lv_obj_set_style_text_font(ui_Label_brightness, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_Button_Connect_Onenet = lv_btn_create(ui_Screen_menu);
-    lv_obj_set_width(ui_Button_Connect_Onenet, 57);
-    lv_obj_set_height(ui_Button_Connect_Onenet, 30);
-    lv_obj_set_x(ui_Button_Connect_Onenet, 243);
-    lv_obj_set_y(ui_Button_Connect_Onenet, 30);
-    lv_obj_add_flag(ui_Button_Connect_Onenet, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_Button_Connect_Onenet, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-
-    ui_Label_Onenet_Status = lv_label_create(ui_Button_Connect_Onenet);
-    lv_obj_set_width(ui_Label_Onenet_Status, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_Label_Onenet_Status, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_Label_Onenet_Status, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label_Onenet_Status, " 未连接 ");
-    lv_obj_set_style_text_font(ui_Label_Onenet_Status, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
-
     ui_Button_Connect_Bluetooth = lv_btn_create(ui_Screen_menu);
     lv_obj_set_width(ui_Button_Connect_Bluetooth, 58);
     lv_obj_set_height(ui_Button_Connect_Bluetooth, 29);
@@ -237,10 +222,10 @@ void ui_Screen_menu_screen_init(void)
     ui_Label_time = lv_label_create(ui_Screen_menu);
     lv_obj_set_width(ui_Label_time, LV_SIZE_CONTENT);   /// 1
     lv_obj_set_height(ui_Label_time, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_x(ui_Label_time, -26);
+    lv_obj_set_x(ui_Label_time, -18);
     lv_obj_set_y(ui_Label_time, -104);
     lv_obj_set_align(ui_Label_time, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_Label_time, "2020-10-10 12:00");
+    lv_label_set_text(ui_Label_time, "2020-10-10 12:00:00");
     lv_obj_set_style_text_font(ui_Label_time, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
 
     ui_Label19 = lv_label_create(ui_Screen_menu);
@@ -279,6 +264,15 @@ void ui_Screen_menu_screen_init(void)
     lv_label_set_text(ui_Label_led_mode, "关闭");
     lv_obj_set_style_text_font(ui_Label_led_mode, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
 
+    ui_Label_Onenet_Status = lv_label_create(ui_Screen_menu);
+    lv_obj_set_width(ui_Label_Onenet_Status, LV_SIZE_CONTENT);   /// 1
+    lv_obj_set_height(ui_Label_Onenet_Status, LV_SIZE_CONTENT);    /// 1
+    lv_obj_set_x(ui_Label_Onenet_Status, 110);
+    lv_obj_set_y(ui_Label_Onenet_Status, -78);
+    lv_obj_set_align(ui_Label_Onenet_Status, LV_ALIGN_CENTER);
+    lv_label_set_text(ui_Label_Onenet_Status, "未连接");
+    lv_obj_set_style_text_font(ui_Label_Onenet_Status, &ui_font_Font1, LV_PART_MAIN | LV_STATE_DEFAULT);
+
     lv_obj_add_event_cb(ui_Button_Red, ui_event_Button_Red, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button_Blue, ui_event_Button_Blue, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button_Meteor, ui_event_Button_Meteor, LV_EVENT_ALL, NULL);
@@ -289,7 +283,6 @@ void ui_Screen_menu_screen_init(void)
     lv_obj_add_event_cb(ui_Button_Audio, ui_event_Button_Audio, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button_White, ui_event_Button_White, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button_Off, ui_event_Button_Off, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_Button_Connect_Onenet, ui_event_Button_Connect_Onenet, LV_EVENT_ALL, NULL);
     lv_obj_add_event_cb(ui_Button_Connect_Bluetooth, ui_event_Button_Connect_Bluetooth, LV_EVENT_ALL, NULL);
 
 }
